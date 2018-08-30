@@ -1,0 +1,151 @@
+﻿//JMMO General Datos Dirección
+
+//Registro
+
+function cargaColonia(CP, ddlColoniaId, datoColonia) {
+
+    $.ajax({
+        url: '/Registro/consultaDatosPorCP',
+        data: { codigoPostal: CP },
+        type: 'post',
+        success: function (data) {
+
+            var elemento = data[0];
+
+            var html = '';
+            var existe = 0;
+            $.each(data, function (index, value) {
+                if (value.Colonia == datoColonia) {
+                    existe = 1;
+                }
+                html = html + "<option value='" + value.Colonia + "'>";
+                html = html + value.Colonia;
+                html = html + "</option>";
+            });
+
+            if (existe == 0) {
+                html = html + "<option value='" + datoColonia + "'>";
+                html = html + datoColonia;
+                html = html + "</option>";
+            }
+
+
+            $('#' + ddlColoniaId).empty();
+            $("#" + ddlColoniaId).html(html);
+
+            $("#" + ddlColoniaId).val(datoColonia);
+
+
+        }
+    });
+
+
+}
+
+function verificaDatosDireccion(txtCP, chkOtraColonia, txtOtraColonia, btnOtraColonia, ddlEstadoId, txtcdId, ddlColoniaId, txtMunicipioId, usaNombreEstado) {
+    if ($('#' + txtCP).val() != '' && $('#' + txtCP).val().length == 5) {
+        $.ajax({
+            url: '/Registro/consultaDatosPorCP',
+            data: { codigoPostal: $('#' + txtCP).val() },
+            type: 'post',
+            success: function (data) {
+
+                var elemento = data[0];
+                var nombreEstado = '';
+                var idEstado = '';
+                var nombreCiudad = '';
+                var nombreMunicipio = '';
+
+                if (elemento != undefined) {
+                    nombreEstado = elemento.Estado;
+                    idEstado = elemento.IdEstado;
+                    nombreCiudad = elemento.Ciudad;
+                    nombreMunicipio = elemento.Municipio;
+                }
+
+                $('#' + chkOtraColonia).attr('checked', false);
+                habilitaOtraColonia(chkOtraColonia, txtOtraColonia, btnOtraColonia);
+                $('#' + txtOtraColonia).val('');
+                if (usaNombreEstado == true) {
+                    $('#' + ddlEstadoId).val(nombreEstado);
+                }
+                else {
+                    $('#' + ddlEstadoId).val(idEstado);
+                }
+                $('#' + txtcdId).val(nombreCiudad);
+
+                $('#' + txtMunicipioId).val(nombreMunicipio);
+
+                var html = '';
+                $.each(data, function (index, value) {
+                    html = html + "<option value='" + value.Colonia + "'>";
+                    html = html + value.Colonia;
+                    html = html + "</option>";
+                })
+
+
+                $('#' + ddlColoniaId).empty();
+                $("#" + ddlColoniaId).html(html);
+            }
+        });
+    }
+}
+
+function habilitaOtraColonia(chkId, txtId, btnId) {
+    if ($('#' + chkId).is(':checked')) {
+        $('#' + txtId).removeAttr('disabled');
+        $('#' + btnId).removeAttr('disabled');
+    }
+    else {
+        $('#' + txtId).attr('disabled', 'disabled');
+        $('#' + btnId).attr('disabled', 'disabled');
+    }
+}
+
+function agregarColonia(destino, origen) {
+    var colonia = $('#' + origen).val();
+    if (colonia != '') {
+        var html = html + "<option value='" + colonia + "'>";
+        html = html + colonia;
+        html = html + "</option>";
+        $('#' + destino).append(html);
+
+        $('#' + destino).val(colonia);
+
+        $('#' + origen).val('');
+
+    }
+}
+
+
+function validaDigitos(e) {
+
+    // Allow: backspace, delete, tab, escape, enter and .
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+        // Allow: Ctrl+A
+        (e.keyCode == 65 && e.ctrlKey === true) ||
+        // Allow: home, end, left, right
+        (e.keyCode >= 35 && e.keyCode <= 39)) {
+        // let it happen, don't do anything
+        return;
+    }
+    // Ensure that it is a number and stop the keypress
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+
+}
+
+function validaDireccion(direccion){
+    var resultado = false;
+    //var validador = /(Á|É|Í|Ó|Ú|Ú|Ü|ª|%|Ø|§|°|#|Ò|Ù|º|$|!|\`){+}/;
+    var validador = /[Á|É|Í|Ó|Ú|Ú|Ü|ª|%|Ø|§|°|#|Ò|Ù|º|$|!|`|'|?|¿|¡|~]+/;
+    //console.log(direccion);
+    //console.log(direccion.match(validador));
+    //console.log(direccion.match(validador).length);
+    
+    resultado = direccion.match(validador) == null;
+    //console.log(resultado);
+
+    return resultado;
+}
