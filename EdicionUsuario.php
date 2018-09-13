@@ -35,16 +35,7 @@ function ValidarRequeridos(){
 		$tipoUser = "Administrador";
 	}
 	if($tipoUser==2){
-		$tipoUser = "Supervisor";
-	}
-	if($tipoUser==3){
-		$tipoUser = "Cajero";
-	}
-	if($tipoUser==4){
-		$tipoUser = "Entidad";
-	}
-	if($tipoUser==5){
-		$tipoUser = "Cliente";
+		$tipoUser = "Ejecutivo";
 	}
 	$boton		= "salvar";
 	$javascript = "";

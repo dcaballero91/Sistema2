@@ -133,7 +133,7 @@ Cargando la Página...<br/><br/>
 <tbody id="tbody">
 <?PHP
 $contador = 0;
-$sql      = "SELECT C.ID AS ID,C.NOMBRE AS NOMBRECLIENTE, C.APELLIDOS AS APELLIDOSCLIENTE, C.RUT AS RUT, C.TELEFONO AS TELEFONOCLIENTE, P.NOMBRE_PLAN AS NOMBRE_PLAN";
+$sql      = "SELECT C.ID AS ID,C.NOMBRE AS NOMBRECLIENTE, C.APELLIDOS AS APELLIDOSCLIENTE, C.RUT AS CI, C.TELEFONO AS TELEFONOCLIENTE, P.NOMBRE_PLAN AS NOMBRE_PLAN";
 $sql      = $sql.", P.FECHA_ACTIVACION AS FECHA_ACTIVACION,C.DIRECCION as DIRECCION FROM clientes AS C INNER JOIN plan_clientes AS P ON C.ID_PLAN = P.ID  WHERE VISIBLE=0 ORDER BY RAND() 
 LIMIT 1";
 $rs       = mysql_query($sql,$conexion);
@@ -153,7 +153,7 @@ if(mysql_num_rows($rs)!=0){
 		echo '<td>'.$rows['FECHA_ACTIVACION'].'</td>';
 		echo '<td>';
 ?>		
-		<img src="imagenes/phone-icon.png" style="cursor:pointer;" onclick="TraeDatosCliente('<?php echo $rows['NOMBRECLIENTE'].' '.$rows['APELLIDOSCLIENTE'];?>','<?php echo $rows['RUT']; ?>','<?php echo $rows['DIRECCION']; ?>','<?php echo $rows['ID']; ?>')" title= "LLAMAR A <?php echo $rows['TELEFONOCLIENTE']; ?>" width="25px" height="20px"/>
+		<img src="imagenes/phone-icon.png" style="cursor:pointer;" onclick="TraeDatosCliente('<?php echo $rows['NOMBRECLIENTE'].' '.$rows['APELLIDOSCLIENTE'];?>','<?php echo $rows['CI']; ?>','<?php echo $rows['DIRECCION']; ?>','<?php echo $rows['ID']; ?>')" title= "LLAMAR A <?php echo $rows['TELEFONOCLIENTE']; ?>" width="25px" height="20px"/>
 <?php
 		echo '</td>';
 		echo '</tr>';

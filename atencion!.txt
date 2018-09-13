@@ -1,0 +1,6 @@
+si tienen problemas en alguna linea que contenga llamado a la fecha coloquen lo siguiente antes de llamar la fecha actual:
+
+ini_alter('date.timezone','America/Caracas');   // configurar al lugar donde se encuentran
+
+
+user: admin password:  123456789

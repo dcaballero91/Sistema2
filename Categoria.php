@@ -6,10 +6,10 @@ function ValidarRequeridos(){
 	
 	divResultado 		= document.getElementById('resultado');
 	var txtNombre 		= document.clientes.txtNombre.value;
-	var txtCosto	    = document.clientes.txtCosto.value;
+	var txteje	    = document.clientes.txteje.value;
 	ajax = newAjax();	
 	
-	ajax.open("POST", "Configuracion/GuardaPlan.php",true);
+	ajax.open("POST", "Configuracion/Guardarcategoria.php",true);
 	ajax.onreadystatechange=function() {
 		if (ajax.readyState==4) {
 			//mostrar resultados en esta capa
@@ -18,7 +18,7 @@ function ValidarRequeridos(){
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	//enviando los valores
-	ajax.send("txtNombre="+txtNombre+"&txtCosto="+txtCosto);
+	ajax.send("txtNombre="+txtNombre+"&txteje="+txteje);
 	
 }
 </script>
@@ -32,7 +32,7 @@ function ValidarRequeridos(){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;
 	}
-	Cabecera("Tipos de vehiculos");
+	Cabecera("Nueva categoria");
 	$boton		= "Guardar";
 	$javascript = "Guardar();";
 	echo '<form name="clientes" id="clientes" method="post" action="" onsubmit="ValidarRequeridos(); return false">';
@@ -40,17 +40,21 @@ function ValidarRequeridos(){
 	echo '<table>';
 	echo '<tr><td colspan=2><div id="resultado"></div></td></tr>';
 	echo '<tr>';
-	echo '	<td><strong>Categoria:</strong></td>';
+	echo '	<td><strong>Nro categoria:</strong></td>';
 	echo '	<td><input type="text" name="txtNombre" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
-	echo '	<td><strong>Costo:</strong></td>';
-	echo '	<td><input type="text" name="txtCosto" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
+	echo '	<td><strong>cantidad de eje:</strong></td>';
+	echo '	<td><input type="text" name="txteje" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
+
 	echo '</tr>';
+
+
 	echo '</table>';
 	echo '</center>';
 	Pie($boton,$javascript);
 	echo '</form>';
+
 ?>
 <center>
 <br/>
@@ -59,14 +63,16 @@ function ValidarRequeridos(){
 <thead>
 <tr>
 <th>ID</th>
-<th>DESCRIPCION</th>
-<th>COSTO</th>
+<th>Nro categoria</th>
+<th>Cantidad de eje</th>
+<th><td><a href="actualizar.php?idcat=<?php echo $fila ['idcat']?>">Eliminar</a></td></th>
+<td><a href="actualizar.php?idcat=<?php echo $fila ['idcat']?>">Eliminar</a></td>
 <tr>
 </thead>
 <tbody id="tbody">
 <?php
 	$contador = 0;
-$sql      = "SELECT * FROM planes Order by DESCRIPCION";
+$sql      = "SELECT * FROM categoria Order by nro_cat";
 $rs       = mysql_query($sql,$conexion);
 if(mysql_num_rows($rs)!=0){
 	while($rows = mysql_fetch_assoc($rs)){
@@ -76,13 +82,15 @@ if(mysql_num_rows($rs)!=0){
 		if($contador%2){$body="even";}
 		echo '<tr class="'.$body.'">';
 		echo '<td>'.$contador.'</td>';
-		echo '<td>'.$rows['DESCRIPCION'].'</td>';
-		echo '<td>'.$rows['COSTO'].'</td>';
+		echo '<td>'.$rows['nro_cat'].'</td>';
+		echo '<td>'.$rows['cantidad_eje'].'</td>';
 		echo '</tr>';
 	}
 }
 
 ?>
+<td><a href="actualizar.php?idcat=<?php echo $fila ['idcat']?>">Editar</a></td>
+<td><a href="actualizar.php?idcat=<?php echo $fila ['idcat']?>">Eliminar</a></td>
 </tbody>
 </table>
 </div>

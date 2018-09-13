@@ -53,7 +53,7 @@ function ValidarRequeridos(){
 	echo '	<td><input type="text" name="txtApellidos" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
-	echo '	<td align="left"><strong>Rut:</strong></td>';
+	echo '	<td align="left"><strong>CI:</strong></td>';
 	echo '	<td><input type="text" name="txtRut" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
@@ -65,7 +65,7 @@ function ValidarRequeridos(){
 	echo '	<td><input type="text" name="txtDireccion" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
-	echo '	<td><strong>Plan:</strong></td>';
+	echo '	<td><strong>Tipo de Vehiculo:</strong></td>';
 	echo '	<td>';
 	
     echo '<div class="dropdown">';

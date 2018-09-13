@@ -27,7 +27,7 @@ select
 
 <body topmargin="0" leftmargin="0" style="margin:0px">
  
- <?php
+
   <!-- Header -->
     <div id="line">
     </div>
@@ -548,7 +548,7 @@ select
 
    
 <link rel="stylesheet" type="text/css" href="chrome-extension://liecbddmkiiihnedobmlmillhodjkdmb/css/content.css">
-?>
+
 </body>
 <loom-container id="lo-engage-ext-container"><loom-shadow data-reactroot="" classname="resolved">
 </loom-shadow></loom-container>

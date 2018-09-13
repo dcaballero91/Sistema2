@@ -1,0 +1,50 @@
+<link href="css/Estilo.css" rel="stylesheet" type="text/css"/>
+<script>
+function CapturarReporte(url){
+	window.location="CapturaReporte.php?url="+url;
+}
+function Permisos(nombre){
+	window.location="PermisosReportes.php?nombre="+nombre;
+}
+</script>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<meta content="IE=edge,requiresActiveX=true" http-equiv="X-UA-Compatible" />
+<link rel="shortcut icon" href="imagenes/logo.ico" />
+<link href="css/Estilo.css" rel="stylesheet" type="text/css"/>	
+<title>SISTEMA</title>
+</head>
+<body style="background-image: url(imagenes/Fondo.jpg);">
+<center>
+<!-- tabla login --->
+<table width='450' border='0' class='ventanas' cellspacing='0' cellpadding='0'>
+<tr>
+	<td colspan='3' class='tabla_ventanas' height='10' colspan='3' align='center'>REPORTES</td>
+</tr>
+<tr><td colspan=3><br/></td></tr>
+<tr>
+<td colspan='3'>
+
+<center><table border=0 cellpadding="0" cellspacing="0"><tr><td align="">						<img src="imagenes/MINISELECT.jpg" onclick="Permisos('')" title="Permisos" />
+		&nbsp;						<img src="imagenes/MINIIMPRIMIR.jpg" onclick="CapturarReporte('LogLlamadas')" title="Ver Reporte"/>
+		&nbsp;&nbsp;<font size=3>Registro de Morosos
+</font></td></tr><tr><td align="">						<img src="imagenes/MINISELECT.jpg" onclick="Permisos('')" title="Permisos" />
+		&nbsp;						<img src="imagenes/MINIIMPRIMIR.jpg" onclick="CapturarReporte('Usuarios')" title="Ver Reporte"/>
+		&nbsp;&nbsp;<font size=3>Reporte de Clientes
+</font></td></tr></table></center></td>
+</tr>
+<tr>
+<td colspan=3 align='center'><img src='imagenes/HRline200.png' width='250'></td>
+</tr>
+<tr>
+<td height='50' colspan=3 align='center'><button class="clean-gray" onclick="print();"> IMPRIMIR </button></td>
+</tr>
+</table>
+</center>
+</body>
+</html>
