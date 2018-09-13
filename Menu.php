@@ -93,6 +93,13 @@ select
 								name: "Mis Datos", 
 								icon: "imagenes/ppersonal.png",
 								items:[
+																{	
+										name: "Persona",
+										icon: "imagenes/pedidos.png",
+										items:[
+																				]
+										}		
+										,
 																		{	
 										name: "Mi Informacion",
 										icon: "imagenes/pedidos.png",

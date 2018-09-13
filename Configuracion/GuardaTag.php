@@ -5,14 +5,7 @@
 	$txtId   = strtoupper(trim($_POST['txtId']));
 	$txtCod_tag= strtoupper(trim($_POST['txtCod_tag']));
 	$mensaje     = "";
-	if($txtId=="" ){
-		$mensaje = '<br/><div class="information-box round">'."ID No puede estar vacio</div>";
-	}
-	else{
-		$mensaje = '<br/><div class="information-box round">'."OK	</div>";
 
-	}
-	/*
 	if($txtID==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: ID</div>";
 	}elseif($txtNombre==""){
@@ -34,7 +27,7 @@
 			$mensaje = '<br/><div class="information-box round">'."Registros Guardados Correctamente</div>";
 		}
 		
-	}*/
+	}
 	echo $mensaje;
 	
 

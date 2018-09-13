@@ -13,3 +13,4 @@ REPORTES 						|ListarReportes.php
 PASSWORD						|EditarPassword.php
 PERMISOS						|ListarUsuarios.php
 INFORMACION						|AccionesAdmin.php
+PERSONA							|Persona.php
