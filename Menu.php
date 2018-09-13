@@ -45,7 +45,7 @@ select
 																]
 								}		
 								,
-								{
+								/*{
 								name: "Clientes", 
 								icon: "imagenes/perfil.png",
 								items:[
@@ -88,7 +88,7 @@ select
 										}		
 																		]
 								}		
-								,	
+								,*/	
 								{
 								name: "Mis Datos", 
 								icon: "imagenes/ppersonal.png",
@@ -98,7 +98,39 @@ select
 										icon: "imagenes/pedidos.png",
 										items:[
 																				]
-										}		
+										}	,
+
+																	{	
+										name: "Listar Persona",
+										icon: "imagenes/usuarios.png",
+										items:[
+																				]
+										}	
+										,
+																	{	
+										name: "Cliente",
+										icon: "imagenes/usuarios.png",
+										items:[
+																				]
+										}	
+										,
+																	{	
+										name: "Listar Cliente",
+										icon: "imagenes/usuarios.png",
+										items:[
+																				]
+										}	
+										,	{
+										name: "Usuarios", 
+										icon: "imagenes/usuarios.png",
+										items:[
+																	]
+									},{	
+										name: "Lista Usuario",
+										icon: "imagenes/usuarios.png",
+										items:[
+																				]
+										}
 										,
 																		{	
 										name: "Mi Informacion",
@@ -106,7 +138,8 @@ select
 										items:[
 																				]
 										}		
-										,										{	
+										,		
+																{	
 										name: "Password",
 										icon: "imagenes/password.png",
 										items:[

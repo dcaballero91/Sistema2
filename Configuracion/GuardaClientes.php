@@ -4,39 +4,35 @@
 	date_default_timezone_set('America/Mexico_City');
 	include('../ScreenCatalogo_Seguridad.php');
 	include('../Conexion_Abrir.php');
+	$txtId		 = strtoupper($_POST['txtId']);
 	$txtNombre   = strtoupper($_POST['txtNombre']);
 	$txtApellidos= strtoupper($_POST['txtApellidos']);
-	$txtRut		 = strtoupper($_POST['txtRut']);
+	$txtCi		 = strtoupper($_POST['txtCi']);
 	$txtDireccion= strtoupper($_POST['txtDireccion']);
-	$plan 		 = strtoupper($_POST['plan']);
-	$txtTelefono = $_POST['txtTelefono'];
-	$Fecha_Plan	 = date("Y-m-d H:i:s");
+	$txtTelefono= strtoupper($_POST['txtTelefono']);
 	$mensaje     = "";
+	if($txtId==""){
+		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Id</div>";
+	}elseif($txtApellidos=="")
 	if($txtNombre==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Nombre</div>";
 	}elseif($txtApellidos==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Apellidos</div>";
-	}elseif($txtRut==""){
+	}elseif($txtCi==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: CI</div>";
 	}elseif($txtDireccion==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Direccion</div>";
-	}elseif($plan==1){
-		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Plan</div>";
 	}elseif($txtTelefono==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Telefono</div>";
 	}else{
-		$sqlx = "SELECT ID FROM clientes WHERE CI='".$txtRut."'";
+		$sqlx = "SELECT idCliente FROM cliente WHERE Ci='".$txtCi."'";
 		$rsx  = mysql_query($sqlx,$conexion);
 		if(mysql_num_rows($rsx)!=0){
 			$mensaje = '<br/><div class="error-box round">'."Error: CI En uso</div>";
 		}else{
 			
-			$sqls 	= "INSERT INTO plan_clientes(NOMBRE_PLAN,FECHA_ACTIVACION,TELEFONO) VALUES ('".$plan."','".$Fecha_Plan."','".$txtTelefono."')";
-			mysql_query($sqls,$conexion);
-			$IdPlan = mysql_insert_id();
-			
-			$sql 	= "INSERT INTO clientes (NOMBRE,APELLIDOS,CI,DIRECCION,TELEFONO,FECHA_REGISTRO,ID_PLAN) VALUES ('".$txtNombre."','".$txtApellidos."','".$txtRut."','".$txtDireccion."',";
-			$sql 	= $sql."'".$txtTelefono."','".$Fecha_Plan."','".$IdPlan."')";
+			$sql 	= "INSERT INTO cliente (idPersona,Ci,Direccion) VALUES ('".$txtId."','".$txtCi."','".$txtDireccion."',";
+			echo $sql;
 			mysql_query($sql,$conexion);
 			$mensaje = '<br/><div class="information-box round">'."Registros Guardados Correctamente</div>";
 		}

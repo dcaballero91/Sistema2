@@ -14,3 +14,6 @@ PASSWORD						|EditarPassword.php
 PERMISOS						|ListarUsuarios.php
 INFORMACION						|AccionesAdmin.php
 PERSONA							|Persona.php
+LISTAR PERSONA               	|Listarpersona.php
+CLIENTE							|Clientes.php
+LISTAR CLIENTE               	|Listarcliente.php

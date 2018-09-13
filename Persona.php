@@ -8,6 +8,7 @@ function ValidarRequeridos(){
 	var txtApellidos 			= document.clientes.txtApellidos.value;
 	var txtCORREO 	= document.clientes.txtCORREO.value;
 	var txtTELEFONO     = document.clientes.txtTELEFONO.value;
+	var txtCI     = document.clientes.txtCI.value;
 	ajax = newAjax();	
 	
 	ajax.open("POST", "Configuracion/Guardapersona.php",true);
@@ -19,7 +20,7 @@ function ValidarRequeridos(){
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	//enviando los valores
-	ajax.send("&txtNombre="+txtNombre+"&txtApellidos="+txtApellidos+"&txtCORREO="+txtCORREO+"&txtTELEFONO="+txtTELEFONO);
+	ajax.send("&txtNombre="+txtNombre+"&txtApellidos="+txtApellidos+"&txtCORREO="+txtCORREO+"&txtTELEFONO="+txtTELEFONO+"&txtCI="+txtCI);
 	
 }
 </script>
@@ -49,6 +50,10 @@ function ValidarRequeridos(){
 	echo '	<td><input type="text" name="txtApellidos" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
+	echo '	<td><strong>CI:</strong></td>';
+	echo '	<td><input type="text" name="txtCI" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
+	echo '</tr>';
+	echo '<tr>';
 	echo '	<td align="left"><strong>CORREO:</strong></td>';
 	echo '	<td><input type="text" name="txtCORREO" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
@@ -56,6 +61,7 @@ function ValidarRequeridos(){
 	echo '	<td><strong>Telefono:</strong></td>';
 	echo '	<td><input type="text" name="txtTELEFONO" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
+
 	
 
 	echo '</select>';

@@ -6,11 +6,11 @@
 function ValidarRequeridos(){
 	
 	divResultado 		= document.getElementById('resultado');
+	var txtId 		= document.clientes.txtId.value;
 	var txtNombre 		= document.clientes.txtNombre.value;
 	var txtApellidos	= document.clientes.txtApellidos.value;
-	var txtRut 			= document.clientes.txtRut.value;
+	var txtCi 			= document.clientes.txtCi.value;
 	var txtDireccion 	= document.clientes.txtDireccion.value;
-	var plan		    = document.clientes.plan.value;
 	var txtTelefono		= document.clientes.txtTelefono.value;
 	ajax = newAjax();	
 	
@@ -23,7 +23,7 @@ function ValidarRequeridos(){
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	//enviando los valores
-	ajax.send("txtNombre="+txtNombre+"&txtApellidos="+txtApellidos+"&txtRut="+txtRut+"&txtDireccion="+txtDireccion+"&plan="+plan+"&txtTelefono="+txtTelefono);
+	ajax.send("txtId="+txtId+"txtNombre="+txtNombre+"&txtApellidos="+txtApellidos+"&txtCi="+txtCi+"&txtDireccion="+txtDireccion+"&plan="+plan+"&txtTelefono="+txtTelefono);
 	
 }
 </script>
@@ -40,10 +40,15 @@ function ValidarRequeridos(){
 	Cabecera("Nuevo Cliente");
 	$boton		= "salvar";
 	$javascript	= "";
+	echo '</tr>';
 	echo '<form name="clientes" id="clientes" method="post" action="" onsubmit="ValidarRequeridos(); return false">';
 	echo '<center>';
 	echo '<table border=0>';
 	echo '<tr><td colspan="2"><div id="resultado"></div></td></tr>';
+	echo '<tr>';
+	echo '	<td><strong>Id</strong></td>';
+	echo '	<td><input type="text" name="txtId" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
+	echo '</tr>';
 	echo '<tr>';
 	echo '	<td><strong>Nombre:</strong></td>';
 	echo '	<td><input type="text" name="txtNombre" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
@@ -54,7 +59,7 @@ function ValidarRequeridos(){
 	echo '</tr>';
 	echo '<tr>';
 	echo '	<td align="left"><strong>CI:</strong></td>';
-	echo '	<td><input type="text" name="txtRut" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
+	echo '	<td><input type="text" name="txtCi" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
 	echo '	<td align="left"><strong>Telefono:</strong></td>';
@@ -64,27 +69,10 @@ function ValidarRequeridos(){
 	echo '	<td><strong>Direccion:</strong></td>';
 	echo '	<td><input type="text" name="txtDireccion" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
-	echo '<tr>';
-	echo '	<td><strong>Tipo de Vehiculo:</strong></td>';
-	echo '	<td>';
-	
-    echo '<div class="dropdown">';
-    echo '<select name="plan" class="dropdown-select">';
-    echo '<option value="0">Seleccione Opcion</option>';
-	$sql = "SELECT * FROM planes ORDER BY DESCRIPCION";
-	$rs  = mysql_query($sql,$conexion);
-	if(mysql_num_rows($rs)!=0){
-		while($row = mysql_fetch_assoc($rs)){
-			 echo '<option value="'.$row['DESCRIPCION'].' '.$row['COST'].'">"'.$row['DESCRIPCION'].' '.$row['COST'].'"</option>';
-		}
-	}
-    echo '</select>';
-    echo '</div>';
-    
-	echo '</td>';
-	echo '</tr>';
+
 	echo '</table>';
 	echo '</center>';
 	Pie($boton,$javascript);
+	//Pie($boton2,$javascript);
 	echo '</form>';
 ?>
