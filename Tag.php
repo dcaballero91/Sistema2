@@ -6,7 +6,7 @@ function ValidarRequeridos(){
 	divResultado 		= document.getElementById('resultado');
 	var txtId 		= document.clientes.txtId.value;
 	var txtCod_tag	= document.clientes.txtCod_tag.value;
-	var TipoTag 			= document.clientes.TipoTag.value;
+	var Estado 			= document.clientes.Estado.value;
 		ajax = newAjax();	
 	
 	ajax.open("POST", "Configuracion/GuardaTag.php",true);
@@ -18,7 +18,7 @@ function ValidarRequeridos(){
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	//enviando los valores
-	ajax.send(	);
+	ajax.send(	"&txtId="+txtId+"&txtCod_tag="+txtCod_tag+"&Estado="+Estado);
 	
 }
 </script>
@@ -39,7 +39,7 @@ function ValidarRequeridos(){
 	echo '<form name="clientes" id="clientes" method="post" action="" onsubmit="ValidarRequeridos(); return false">';
 	echo '<center>';
 	echo '<table>';
-	echo '	<td><strong>Id:</strong></td>';
+	echo '	<td><strong>Id Cliente:</strong></td>';
 	echo '	<td><input type="text" name="txtId" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
@@ -49,7 +49,7 @@ function ValidarRequeridos(){
 
 	echo '	<td><strong>Estado:</strong></td>';	
 	echo '	<td>';
-	echo '<select name="TipoTag">';
+	echo '<select name="Estado">';
 	echo '<option value="1">Activo</option>';
 	echo '<option value="2">Inactivo</option>';
 	echo '</select>';

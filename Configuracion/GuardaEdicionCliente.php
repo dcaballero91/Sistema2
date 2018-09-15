@@ -9,7 +9,7 @@
 	$txtDireccion= strtoupper($_POST['txtDireccion']);
 	$txtTelefono= strtoupper($_POST['txtTelefono']);
 	$mensaje     = "";
-	if($txtId==""){
+	iif($txtId==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Id</div>";
 	}elseif($txtNombre==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Nombre</div>";
@@ -22,17 +22,14 @@
 	}elseif($txtTelefono==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Telefono</div>";
 	}else{
-		$sqlx = "SELECT idCliente FROM cliente WHERE Ci='".$txtCi."'";
-		$rsx  = mysql_query($sqlx,$conexion);
-		if(mysql_num_rows($rsx)!=0){
-			$mensaje = '<br/><div class="error-box round">'."Error: CI En uso</div>";
-		}else{
-			$sql 	= "INSERT INTO cliente(IdPersona,Ci,Direccion) VALUES ('".$txtId."','".$txtCi."','".$txtDireccion."')";
-			echo $sql;
+			
+			$sql = "UPDATE cliente SET Ci='".$txtCi."', Direccion='".$txtDireccion."', ";
+			//$sql = $sql."DIRECCION='".$txtDireccion."' WHERE ID='".$_SESSION['USERCORE']."' ";
 			mysql_query($sql,$conexion);
-			$mensaje = '<br/><div class="information-box round">'."Registros Guardados Correctamente</div>";
-		}
+			$mensaje = '<br/><div class="information-box round">'."Registros Guardados Correctamente</div>";		
 	}
 	echo $mensaje;
+	
+
 
 ?>

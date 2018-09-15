@@ -44,7 +44,7 @@ Cargando la Página...<br/><br/>
 <th></th>
 <th>ID</th>
 <th>NOMBRE</th>
-<th>RUT</th>
+<th>CI</th>
 <th>USUARIO</th>
 <th>TIPO USUARIO</th>
 
@@ -73,7 +73,7 @@ if(mysql_num_rows($rs)!=0){
 		echo '</td>';
 		echo '<td>'.$rows['ID'].'</td>';
 		echo '<td>'.$rows['NOMBRE'].' '.$rows['APELLIDOS'].'</td>';		
-		echo '<td>'.$rows['RUT'].'</td>';
+		echo '<td>'.$rows['CI'].'</td>';
 		echo '<td>'.$rows['USUARIO'].'</td>';
 		echo '<td>'.$tipo.'</td>';
 		echo '</tr>';

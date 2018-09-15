@@ -6,12 +6,12 @@
 function ValidarRequeridos(){
 	
 	divResultado 		= document.getElementById('resultado');
-	var txtId 		= document.clientes.txtId.value;
-	var txtNombre 		= document.clientes.txtNombre.value;
+	var txtId			= document.clientes.txtId.value;
+	var txtNombre		= document.clientes.txtNombre.value;
 	var txtApellidos	= document.clientes.txtApellidos.value;
 	var txtCi 			= document.clientes.txtCi.value;
 	var txtDireccion 	= document.clientes.txtDireccion.value;
-	var txtTelefono		= document.clientes.txtTelefono.value;
+	var txtTelefono    	= document.clientes.txtTelefono.value;
 	ajax = newAjax();	
 	
 	ajax.open("POST", "Configuracion/GuardaClientes.php",true);
@@ -23,12 +23,14 @@ function ValidarRequeridos(){
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	//enviando los valores
-	ajax.send("txtId="+txtId+"txtNombre="+txtNombre+"&txtApellidos="+txtApellidos+"&txtCi="+txtCi+"&txtDireccion="+txtDireccion+"&plan="+plan+"&txtTelefono="+txtTelefono);
-	
-}
+	ajax.send("&txtId="+txtId+"&txtNombre="+txtNombre+"&txtApellidos="+txtApellidos+"&txtCi="+txtCi+"&txtDireccion="+txtDireccion+"&txtTelefono="+txtTelefono);
+	}
+
+
+
 </script>
 <?php
-	include('DibujaVentana.php');
+include('DibujaVentana.php');
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
@@ -37,14 +39,14 @@ function ValidarRequeridos(){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;
 	}
-	Cabecera("Nuevo Cliente");
+	Cabecera("Cargar Nuevo Cliente");
 	$boton		= "salvar";
 	$javascript	= "";
-	echo '</tr>';
+	echo '<div id="resultado"></div>';
 	echo '<form name="clientes" id="clientes" method="post" action="" onsubmit="ValidarRequeridos(); return false">';
 	echo '<center>';
 	echo '<table border=0>';
-	echo '<tr><td colspan="2"><div id="resultado"></div></td></tr>';
+	echo '<tr><td colspan="2"><div id="resultado"></div></td></tr>';		
 	echo '<tr>';
 	echo '	<td><strong>Id</strong></td>';
 	echo '	<td><input type="text" name="txtId" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
@@ -58,21 +60,19 @@ function ValidarRequeridos(){
 	echo '	<td><input type="text" name="txtApellidos" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
-	echo '	<td align="left"><strong>CI:</strong></td>';
+	echo '	<td><strong>CI:</strong></td>';
 	echo '	<td><input type="text" name="txtCi" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
-	echo '</tr>';
-	echo '<tr>';
-	echo '	<td align="left"><strong>Telefono:</strong></td>';
-	echo '	<td><input type="text" name="txtTelefono" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
 	echo '	<td><strong>Direccion:</strong></td>';
 	echo '	<td><input type="text" name="txtDireccion" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
-
+	echo '<tr>';
+	echo '	<td align="left"><strong>Telefono:</strong></td>';
+	echo '	<td><input type="text" name="txtTelefono" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
+	echo '</tr>';
 	echo '</table>';
 	echo '</center>';
 	Pie($boton,$javascript);
-	//Pie($boton2,$javascript);
 	echo '</form>';
 ?>

@@ -3,12 +3,12 @@
 <script LANGUAGE="JavaScript">
 function ValidarRequeridos(){
 	
-	divResultado 		= document.getElementById('resultado');
+	divResultado 	= document.getElementById('resultado');
 	var txtNombre	= document.clientes.txtNombre.value;
-	var txtApellidos 			= document.clientes.txtApellidos.value;
+	var txtApellidos= document.clientes.txtApellidos.value;
 	var txtCORREO 	= document.clientes.txtCORREO.value;
-	var txtTELEFONO     = document.clientes.txtTELEFONO.value;
-	var txtCI     = document.clientes.txtCI.value;
+	var txtTELEFONO = document.clientes.txtTELEFONO.value;
+	var txtCI     	= document.clientes.txtCI.value;
 	ajax = newAjax();	
 	
 	ajax.open("POST", "Configuracion/Guardapersona.php",true);
@@ -61,13 +61,7 @@ function ValidarRequeridos(){
 	echo '	<td><strong>Telefono:</strong></td>';
 	echo '	<td><input type="text" name="txtTELEFONO" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
-
-	
-
-	echo '</select>';
-	echo '</td>';
-	echo '</tr>';
-	echo '</table>';
+ 	echo '</table>';
 	echo '</center>';
 	Pie($boton,$javascript);
 	echo '</form>';

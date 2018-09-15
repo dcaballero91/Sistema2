@@ -65,8 +65,7 @@ function ValidarRequeridos(){
 <th>ID</th>
 <th>Nro categoria</th>
 <th>Cantidad de eje</th>
-<th><td><a href="actualizar.php?idcat=<?php echo $fila ['idcat']?>">Eliminar</a></td></th>
-<td><a href="actualizar.php?idcat=<?php echo $fila ['idcat']?>">Eliminar</a></td>
+
 <tr>
 </thead>
 <tbody id="tbody">
@@ -89,8 +88,6 @@ if(mysql_num_rows($rs)!=0){
 }
 
 ?>
-<td><a href="actualizar.php?idcat=<?php echo $fila ['idcat']?>">Editar</a></td>
-<td><a href="actualizar.php?idcat=<?php echo $fila ['idcat']?>">Eliminar</a></td>
 </tbody>
 </table>
 </div>

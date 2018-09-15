@@ -45,7 +45,7 @@ select
 																]
 								}		
 								,
-								/*{
+								{
 								name: "Clientes", 
 								icon: "imagenes/perfil.png",
 								items:[
@@ -88,46 +88,111 @@ select
 										}		
 																		]
 								}		
-								,*/	
+								,
+
 								{
 								name: "Mis Datos", 
 								icon: "imagenes/ppersonal.png",
 								items:[
 																{	
+										name: "Agregar Persona",
+										icon: "imagenes/personales.png",
+										items:[
+																	{	
 										name: "Persona",
-										icon: "imagenes/pedidos.png",
+										icon: "imagenes/invitado.png",
 										items:[
 																				]
-										}	,
-
-																	{	
+										}	
+										,							{	
 										name: "Listar Persona",
-										icon: "imagenes/usuarios.png",
+										icon: "imagenes/clasificaciones.png",
 										items:[
 																				]
 										}	
 										,
+																				]
+										}	,
+
+										
 																	{	
+										name: "Nuevo Cliente",
+										icon: "imagenes/invitado.png",
+										items:[
+																			{	
 										name: "Cliente",
 										icon: "imagenes/usuarios.png",
 										items:[
 																				]
 										}	
-										,
-																	{	
+										,						{	
 										name: "Listar Cliente",
+										icon: "imagenes/clasificaciones.png",
+										items:[
+																				]
+										}	
+										,		{	
+										name: "Editar Cliente",
+										icon: "imagenes/clasificaciones.png",
+										items:[
+																				]
+										}	
+										,					]
+										}	
+										,
+
+																	{	
+										name: "Nuevo Tag",
+										icon: "imagenes/invitado.png",
+										items:[
+																			{	
+										name: "Tag",
 										icon: "imagenes/usuarios.png",
 										items:[
 																				]
 										}	
-										,	{
-										name: "Usuarios", 
+										,						{	
+										name: "Listar Tag",
+										icon: "imagenes/clasificaciones.png",
+										items:[
+																				]
+										}	
+										,						]
+										}	
+										,
+												{
+										name: " Nuevo Usuarios", 
 										icon: "imagenes/usuarios.png",
 										items:[
-																	]
-									},{	
-										name: "Lista Usuario",
+													{	
+										name: "Usuario",
 										icon: "imagenes/usuarios.png",
+										items:[
+																				]
+										}
+										,{	
+										name: "Lista Usuario",
+										icon: "imagenes/clasificaciones.png",
+										items:[
+																				]
+										}
+										,				]
+									},
+												{
+										name: " Nuevo Vehiculo", 
+										icon: "imagenes/usuarios.png",
+										items:[
+													{	
+										name: "Vehiculo",
+										icon: "imagenes/usuarios.png",
+										items:[
+																				]
+										}
+										,				]
+									},
+									{	
+										name: "Planes",
+										icon: "imagenes/comunicafiles.png",
 										items:[
 																				]
 										}
@@ -188,13 +253,7 @@ select
 																				]
 										}
 										,
-										{	
-										name: "Planes",
-										icon: "imagenes/comunicafiles.png",
-										items:[
-																				]
-										}
-										,
+										
 										{	
 										name: "Permisos",
 										icon: "imagenes/usuarios.png",

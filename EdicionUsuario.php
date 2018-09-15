@@ -35,9 +35,15 @@ function ValidarRequeridos(){
 		$tipoUser = "Administrador";
 	}
 	if($tipoUser==2){
-		$tipoUser = "Ejecutivo";
+		$tipoUser = "Supervisor";
+	}if($tipoUser==3){
+		$tipoUser = "Cajero";
+	}if($tipoUser==4){
+		$tipoUser = "Entidad";
+	}if($tipoUser==5){
+		$tipoUser = "CLiente";
 	}
-	$boton		= "salvar";
+		$boton		= "salvar";
 	$javascript = "";
 	echo '<div id="resultado"></div>';
 	echo '<form name="clientes" id="clientes" method="post" action="" onsubmit="ValidarRequeridos(); return false">';
@@ -53,8 +59,8 @@ function ValidarRequeridos(){
 	echo '</tr>';
 	
 	echo '<tr>';
-	echo '	<td align="left"><strong>Rut:</strong></td>';
-	echo '	<td><input type="text" name="txtRut" disabled value="'.$row['RUT'].'" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
+	echo '	<td align="left"><strong>Ci:</strong></td>';
+	echo '	<td><input type="text" name="txtRut" disabled value="'.$row['CI'].'" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	
 	echo '<tr>';

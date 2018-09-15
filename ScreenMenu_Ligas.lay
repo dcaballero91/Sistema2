@@ -4,7 +4,7 @@ NUEVO CLIENTE					|Clientes.php
 CARGAR EXCEL					|CargarClientes.php
 PROCESAR EXCEL					|LeerExcelClientes.php
 LOGIN							|Login.php
-MI INFORMACION					|EdicionUsuario.php
+MI INFORMACION					|EdicionCliente.php
 TIPIFICACION					|Tipificacion.php
 USUARIOS						|Usuarios.php
 LOGOUT							|Logout.php
@@ -17,3 +17,7 @@ PERSONA							|Persona.php
 LISTAR PERSONA               	|Listarpersona.php
 CLIENTE							|Clientes.php
 LISTAR CLIENTE               	|Listarcliente.php
+EDITAR CLIENTE					|EdicionCliente.php
+TAG								|Tag.php
+LISTAR TAG               		|Listartag.php
+VEHICULO               			|Vehiculo.php
