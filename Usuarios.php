@@ -34,7 +34,7 @@ function ValidarRequeridos(){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;
 	}
-	Cabecera("Nuevo Ejecutivo / Nuevo Usuario");
+	Cabecera("Nuevo Usuario");
 	$boton		= "salvar";
 	$javascript = "";
 	echo '<div id="resultado"></div>';
@@ -50,7 +50,7 @@ function ValidarRequeridos(){
 	echo '	<td><input type="text" name="txtApellidos" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
-	echo '	<td align="left"><strong>Rut:</strong></td>';
+	echo '	<td align="left"><strong>CI:</strong></td>';
 	echo '	<td><input type="text" name="txtRut" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
@@ -62,7 +62,10 @@ function ValidarRequeridos(){
 	echo '	<td>';
 	echo '<select name="TipoUsuario">';
 	echo '<option value="1">Administrador</option>';
-	echo '<option value="2">Ejecutivo</option>';
+	echo '<option value="2">Supervisor</option>';
+	echo '<option value="3">Cajero</option>';
+	echo '<option value="4">Entidad</option>';
+	echo '<option value="5">Cliente</option>';
 	echo '</select>';
 	echo '</td>';
 	echo '</tr>';

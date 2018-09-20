@@ -34,7 +34,7 @@ include('DibujaVentana.php');
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
-	$estatus = PermisosUsuario($_SESSION['USERCORE'],3,$conexion);
+	$estatus = PermisosUsuario($_SESSION['USERCORE'],20,$conexion);
 	if($estatus==0){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;

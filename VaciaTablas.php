@@ -4,7 +4,7 @@ function acepta(){
 }
 </script>
 <?php
-	date_default_timezone_set('America/Mexico_City');
+	date_default_timezone_set('America/Asuncion');
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DibujaVentana.php');

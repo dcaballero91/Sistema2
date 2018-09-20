@@ -38,7 +38,7 @@ function ValidarRequeridos(){
 	echo '<table>';
 	echo '<tr>';
 	echo '	<td align="left"><strong>Usuario:</strong></td>';
-	echo '	<td><input type="text" name="txtRut" disabled value="'.$row['RUT'].'" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
+	echo '	<td><input type="text" name="txtRut" disabled value="'.$row['CI'].'" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	
 	echo '<tr>';

@@ -3,10 +3,7 @@
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
-	$estatus = PermisosUsuario($_SESSION['USERCORE'],10,$conexion);
-	$permiso = PermisosUsuario($_SESSION['USERCORE'],11,$conexion);
-	$password= PermisosUsuario($_SESSION['USERCORE'],12,$conexion);
-	$password= PermisosUsuario($_SESSION['USERCORE'],23,$conexion);
+	$estatus = PermisosUsuario($_SESSION['USERCORE'],25,$conexion);
 	if($estatus==0){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;

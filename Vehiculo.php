@@ -1,7 +1,6 @@
 <script src="js/ajax.js" type="text/javascript"></script>
-<link rel="stylesheet" href="css/Combobox.css">
-<link href="css/Estilo.css" rel="stylesheet" type="text/css"/>
-
+<link rel="stylesheet" href="css/tablasmostrar.css">
+<link href="css/Estilo.css" rel="stylesheet" type="text/css"/> 
 <script LANGUAGE="JavaScript">
 function ValidarRequeridos(){
 	
@@ -36,7 +35,7 @@ include('DibujaVentana.php');
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
-	$estatus = PermisosUsuario($_SESSION['USERCORE'],3,$conexion);
+	$estatus = PermisosUsuario($_SESSION['USERCORE'],26,$conexion);
 	if($estatus==0){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;
@@ -131,18 +130,20 @@ if(mysql_num_rows($rs)!=0){
 		echo '<td>'.$rows['Direccion'].'</td>';
 		echo '<td>'.$rows['Cod_Tag'].'</td>';
 		
+		echo '<td>';
 		$estado=$rows['Estado'];
-		echo $estado;
+		
 		if($estado==1){
-			
-			echo "activo";
+		
+			echo "ACTIVO";
 		}
 		elseif ($estado==2) {
-			echo "inactivo";
+			echo "INACTIVO";
 			# code...
 		}else{
 			echo "Cargar Estado";
 		}
+		echo '</td>';
 		echo '<td>'.$rows['Marca'].'</td>';
 		echo '<td>'.$rows['Modelo'].'</td>';
 		echo '<td>'.$rows['Matricula'].'</td>';

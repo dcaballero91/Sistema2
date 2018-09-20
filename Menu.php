@@ -45,50 +45,7 @@ select
 																]
 								}		
 								,
-								{
-								name: "Clientes", 
-								icon: "imagenes/perfil.png",
-								items:[
-																		{	
-										name: "Mis Clientes",
-										icon: "imagenes/personales.png",
-										items:[
-																				]
-										}		
-										,										{	
-										name: "Nuevo Cliente",
-										icon: "imagenes/invitado.png",
-										items:[
-																				]
-										}		
-										,										{	
-										name: "Cargar Excel",
-										icon: "imagenes/subetxt.png",
-										items:[
-																				]
-										}
-										,										{	
-										name: "Procesar Excel",
-										icon: "imagenes/procesatxt.png",
-										items:[
-																				]
-										}
-												
-										,										{	
-										name: "Login",
-										icon: "imagenes/login.png",
-										items:[
-																				]
-										}		
-										,										{	
-										name: "Logout",
-										icon: "imagenes/logout.png",
-										items:[
-																				]
-										}		
-																		]
-								}		
-								,
+								
 
 								{
 								name: "Mis Datos", 
@@ -106,34 +63,30 @@ select
 										}	
 										,							{	
 										name: "Listar Persona",
-										icon: "imagenes/clasificaciones.png",
-										items:[
-																				]
-										}	
-										,
-																				]
+										icon: "imagenes/listar.png",
+										items:[		]		}	
+										,]
 										}	,
-
-										
+	
 																	{	
 										name: "Nuevo Cliente",
 										icon: "imagenes/invitado.png",
 										items:[
 																			{	
 										name: "Cliente",
-										icon: "imagenes/usuarios.png",
-										items:[
+										icon: "imagenes/invitado.png",
+																			items:[
 																				]
 										}	
 										,						{	
 										name: "Listar Cliente",
-										icon: "imagenes/clasificaciones.png",
+										icon: "imagenes/listar.png",
 										items:[
 																				]
 										}	
 										,		{	
 										name: "Editar Cliente",
-										icon: "imagenes/clasificaciones.png",
+										icon: "imagenes/editar.png",
 										items:[
 																				]
 										}	
@@ -143,17 +96,17 @@ select
 
 																	{	
 										name: "Nuevo Tag",
-										icon: "imagenes/invitado.png",
+										icon: "imagenes/tag.png",
 										items:[
 																			{	
 										name: "Tag",
-										icon: "imagenes/usuarios.png",
+										icon: "imagenes/rfid.png",
 										items:[
 																				]
 										}	
 										,						{	
 										name: "Listar Tag",
-										icon: "imagenes/clasificaciones.png",
+										icon: "imagenes/listar.png",
 										items:[
 																				]
 										}	
@@ -165,14 +118,14 @@ select
 										icon: "imagenes/usuarios.png",
 										items:[
 													{	
-										name: "Usuario",
+										name: "Usuarios",
 										icon: "imagenes/usuarios.png",
 										items:[
 																				]
 										}
 										,{	
 										name: "Lista Usuario",
-										icon: "imagenes/clasificaciones.png",
+										icon: "imagenes/listar.png",
 										items:[
 																				]
 										}
@@ -180,11 +133,11 @@ select
 									},
 												{
 										name: " Nuevo Vehiculo", 
-										icon: "imagenes/usuarios.png",
+										icon: "imagenes/auto.png",
 										items:[
 													{	
 										name: "Vehiculo",
-										icon: "imagenes/usuarios.png",
+										icon: "imagenes/vehiculo.png",
 										items:[
 																				]
 										}
@@ -199,7 +152,7 @@ select
 										,
 																		{	
 										name: "Mi Informacion",
-										icon: "imagenes/pedidos.png",
+										icon: "imagenes/informacion.png",
 										items:[
 																				]
 										}		
@@ -246,28 +199,35 @@ select
 								icon: "imagenes/configuracion.png",
 								items:[
 								
-										{	
-										name: "Tipificacion",
-										icon: "imagenes/clasificaciones.png",
-										items:[
-																				]
-										}
-										,
+										
 										
 										{	
 										name: "Permisos",
-										icon: "imagenes/usuarios.png",
+										icon: "imagenes/permiso.png",
 										items:[
 																				]
 										}
 										,
 										{	
 										name: "Informacion",
-										icon: "imagenes/tablas.png",
+										icon: "imagenes/bd.png",
 										items:[
 																				]
 										}
-																]
+											,				{	
+										name: "Cargar Excel",
+										icon: "imagenes/subetxt.png",
+										items:[
+																				]
+										}
+										,										{	
+										name: "Procesar Excel",
+										icon: "imagenes/procesatxt.png",
+										items:[
+																				]
+										}
+												
+										,									]
 								}
 								,	
 								{
