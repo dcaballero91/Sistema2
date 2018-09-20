@@ -21,3 +21,4 @@ EDITAR CLIENTE					|EdicionCliente.php
 TAG								|Tag.php
 LISTAR TAG               		|Listartag.php
 VEHICULO               			|Vehiculo.php
+LISTA USUARIO 					|Listadeusuario.php

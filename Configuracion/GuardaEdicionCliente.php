@@ -23,7 +23,7 @@
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Telefono</div>";
 	}else{
 			
-			$sql = "UPDATE cliente SET Ci='".$txtCi."', Direccion='".$txtDireccion."', ";
+			$sql = "UPDATE cliente SET Ci='".$txtCi."', Direccion='".$txtDireccion."'";
 			//$sql = $sql."DIRECCION='".$txtDireccion."' WHERE ID='".$_SESSION['USERCORE']."' ";
 			mysql_query($sql,$conexion);
 			$mensaje = '<br/><div class="information-box round">'."Registros Guardados Correctamente</div>";		
