@@ -42,6 +42,8 @@ include('DibujaVentana.php');
 	Cabecera("Cargar Nuevo Cliente");
 	$boton		= "salvar";
 	$javascript	= "";
+	$boton2		= "Buscar";
+	$javascript2 = "";
 	echo '<div id="resultado"></div>';
 	echo '<form name="clientes" id="clientes" method="post" action="" onsubmit="ValidarRequeridos(); return false">';
 	echo '<center>';
@@ -73,6 +75,6 @@ include('DibujaVentana.php');
 	echo '</tr>';
 	echo '</table>';
 	echo '</center>';
-	Pie($boton,$javascript);
+	Pie($boton,$javascript,$boton2,$javascript2);
 	echo '</form>';
 ?>
