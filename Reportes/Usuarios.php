@@ -28,7 +28,7 @@ Cargando la Página...<br/><br/>
 <thead>
 <tr>
 <th>Nombre</th>
-<th>Rut</th>
+<th>CI</th>
 <th>Direccion</th>
 <th>Usuario</th>
 <th>Tipo Usuario</th>
@@ -53,7 +53,7 @@ if(mysql_num_rows($rs)!=0){
 		if($contador%2){$body="even";}
 		echo '<tr class="'.$body.'">';
 		echo '<td>'.$rows['NOMBRE'].' '.$rows['APELLIDOS'].'</td>';
-		echo '<td>'.$rows['RUT'].'</td>';
+		echo '<td>'.$rows['CI'].'</td>';
 		echo '<td>'.$rows['DIRECCION'].'</td>';
 		echo '<td>'.$rows['USUARIO'].'</td>';
 		echo '<td>'.$tipo.'</td>';

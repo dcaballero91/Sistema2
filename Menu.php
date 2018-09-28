@@ -84,13 +84,7 @@ select
 										items:[
 																				]
 										}	
-										,		{	
-										name: "Editar Cliente",
-										icon: "imagenes/editar.png",
-										items:[
-																				]
-										}	
-										,					]
+										,							]
 										}	
 										,
 
