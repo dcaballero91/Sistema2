@@ -77,7 +77,7 @@ if(mysql_num_rows($rs)!=0){
 		echo '<tr class="'.$body.'">';
 		echo '<td>'.$contador.'</td>';
 		echo '<td>'.$rows['DESCRIPCION'].'</td>';
-		echo '<td>'.$rows['COSTO'].'</td>';
+		echo '<td>'.$rows['Costo'].'</td>';
 		echo '</tr>';
 	}
 }

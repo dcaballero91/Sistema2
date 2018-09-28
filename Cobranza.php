@@ -59,12 +59,14 @@ Cargando la Página...<br/><br/>
 			<div class="mensaje"></div>
 <table id="table" border=0 cellpadding="0" cellspacing="0" class="editinplace">
 			<tr>
-				<th>ID</th>
-				<th>Nombre</th>
-				<th>Apellido</th>
-				<th>Correo</th>
-				<th>Tel&eacute;fono</th>
-				<th>Ci</th>
+			<tr><th>CEDULA</th>
+			<th>CANTIDAD</th>
+			<th>COD. TAG</th>
+			<th>MARCA</th>
+			<th>MODELO</th>
+			<th>MATRICULA</th>
+			<th>COSTO UNITARIO</th>
+			<th>TOTAL</th>
 					</tr>
 		</table>
 
@@ -77,33 +79,35 @@ Cargando la Página...<br/><br/>
 		/* OBTENEMOS TABLA */
 		$.ajax({
 			type: "GET",
-			url: "editPersona.php?tabla=1"
+			url: "editPago.php?tabla=1" 
 		})
 		.done(function(json) {
 			json = $.parseJSON(json)
 			for(var i=0;i<json.length;i++)
 			{
 				$('.editinplace').append(
-					"<tr><td class='id'>"+json[i].id+"</td><td class='editable' data-campo='Nombre'><span>"+json[i].nombre+"</span></td><td class='editable' data-campo='Apellido'><span>"+json[i].apellido+"</span></td><td class='editable' data-campo='Correo'><span>"+json[i].correo+"</span></td><td class='editable' data-campo='Telefono'><span>"+json[i].telefono+"</span></td><td class='editable' data-campo='ci'><span>"+json[i].ci+"</span></td></tr>");
+					"<tr><td class='Ci'>"+json[i].id+"</td><td class='editable' data-campo='Cantidad'><span>"+json[i].cantidad+"</span></td><td class='Cod_Tag'><span>"+json[i].cod_tag+"</span></td><td class=Marca'><span>"+json[i].marca+"</span></td><td class='Modelo'><span>"+json[i].modelo+"</span></td><td class='Matricula'><span>"+json[i].matricula+"</span></td><td class='Costo'><span>"+json[i].costo+"</span></td>><td class='total'><span>"+json[i].total+"</span></td></tr>");
+
+			
 			}
 		});
 		
-		var td,campo,valor,id;
+		var campo,cantidad;
 		$(document).on("click","td.editable span",function(e)
 		{
 			e.preventDefault();
 			$("td:not(.id)").removeClass("editable");
 			td=$(this).closest("td");
 			campo=$(this).closest("td").data("campo");
-			valor=$(this).text();
+			cantidad=$(this).text();
 			id=$(this).closest("tr").find(".id").text();
-			td.text("").html("<input type='text' name='"+campo+"' value='"+valor+"'><a class='enlace guardar' href='#'>Guardar</a><a class='enlace cancelar' href='#'>Cancelar</a>");
+			td.text("").html("<input type='text' name='"+campo+"' value='"+cantidad+"'><a class='enlace guardar' href='#'>Guardar</a><a class='enlace cancelar' href='#'>Cancelar</a>");
 		});
 		
 		$(document).on("click",".cancelar",function(e)
 		{
 			e.preventDefault();
-			td.html("<span>"+valor+"</span>");
+			td.html("<span>"+cantidad+"</span>");
 			$("td:not(.id)").addClass("editable");
 		});
 		
@@ -116,7 +120,7 @@ Cargando la Página...<br/><br/>
 			{
 				$.ajax({
 					type: "POST",
-					url: "editPersona.php",
+					url: "editPago.php",
 					data: { campo: campo, valor: nuevovalor, id:id }
 				})
 				.done(function( msg ) {

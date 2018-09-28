@@ -15,7 +15,7 @@
 		if(mysql_num_rows($rs)!=0){
 			$mensaje = '<br/><div class="error-box round">Existe un Registro similar</div>';
 		}else{
-			$sql 	 = "INSERT INTO planes(DESCRIPCION,COSTO) VALUES ('".$txtNombre."','".$txtCosto."')";
+			$sql 	 = "INSERT INTO planes(DESCRIPCION,Costo) VALUES ('".$txtNombre."','".$txtCosto."')";
 			mysql_query($sql,$conexion);
 			$mensaje = '<br/><div class="information-box round">'."Registros Guardados Correctamente</div>";
 		}

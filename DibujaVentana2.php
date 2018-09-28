@@ -27,7 +27,7 @@
 <?php 
 
 	}
-	function Pie($boton,$javascript){
+	function Pie($boton,$javascript,$boton2,$javascript2){
 ?>
 </td>
 </tr>
@@ -35,7 +35,7 @@
 <td colspan=3 align='center'><img src='imagenes/HRline200.png' width='250'></td>
 </tr>
 <tr>
-<td height='50' colspan=3 align='center'><button class="clean-gray" onclick="<?php echo $javascript; ?>"> <?php echo strtoupper($boton); ?> </button></td>
+<td height='50' colspan=3 align='center'><button class="clean-gray" onclick="<?php echo $javascript; ?>"> <?php echo strtoupper($boton); ?> </button><button class="clean-gray" onclick="<?php echo $javascript2; ?>"> <?php echo strtoupper($boton2); ?> </button></td>
 </tr>
 </table>
 </center>

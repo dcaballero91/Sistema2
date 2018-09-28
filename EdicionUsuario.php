@@ -1,4 +1,4 @@
-<script src="js/ajax.js" type="text/javascript"></script>
+<script src="js/ajax.js" type="text/javascript"></script>	
 <script LANGUAGE="JavaScript">
 function ValidarRequeridos(){
 	

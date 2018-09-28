@@ -21,17 +21,6 @@
 <link rel="stylesheet" type="text/css" href="calendario/tcal.css" />
 <script type="text/javascript" src="calendario/tcal.js"></script>
 <title>SISTEMA</title>
-<script>
-function Permisos(id){
-	window.location="ListarPermisos.php?a="+id;
-}
-</script>
-</head>
-<body style="background-image: url(imagenes/Fondo.jpg);" onload="document.getElementById('loader').style.display='none';">
-<div id="loader" style="position:absolute; width:100%; height:100%; background-color:#ffffff; z-index:1005; text-align:center; padding-top:100px; font-size:20px; font-family:Arial; color:#000000;">
-Cargando la Página...<br/><br/>
-<img height="75" width="75" src="imagenes/loading.gif" />
-</div>
 <center>
 <br/>
 <br/>
@@ -39,37 +28,48 @@ Cargando la Página...<br/><br/>
 <table id="table" border=0 cellpadding="0" cellspacing="0">
 <thead>
 <tr>
-<th>ID</th>
+<tr><th>ID CLIENTE</th>
 <th>NOMBRE APELLIDO</th>
 <th>CI</th>
 <th>TELEFONO</th>
 <th>DIRECCION</th>
-
+<th>ID TAG</th>
+<th>TAG ESTADO</th>
 <tr>
 </thead>
 <tbody id="tbody">
 <?php
 $contador = 0;
-$sql      = "SELECT persona.idPersona, persona.Nombre, persona.Apellido, persona.ci,  cliente.Direccion, persona.Telefono
-FROM persona  JOIN cliente 
-where persona.idPersona = cliente.IdPersona";
+$sql      = "SELECT cliente.idCliente,persona.Nombre, persona.Apellido, persona.ci, persona.Telefono,cliente.Direccion, tag.Cod_Tag,tag.Estado FROM persona INNER JOIN cliente INNER JOIN tag where persona.idPersona = cliente.IdPersona and cliente.idCliente = tag.IdCliente ";
 $rs       = mysql_query($sql,$conexion);
 if(mysql_num_rows($rs)!=0){
 	while($rows = mysql_fetch_assoc($rs)){
-		$tipo        = "Administrador";
-		$contador	 = $contador + 1;
-		$body		 = "odd";	
 		
-		echo '</td>';
-	
-		echo '<td>'.$rows['idPersona'].'</td>';
+	echo '</td>';
+		echo '<td>'.$rows['idCliente'].'</td>';
 		echo '<td>'.$rows['Nombre'].' '.$rows['Apellido'].'</td>';
 		echo '<td>'.$rows['ci'].'</td>';		
-				echo '<td>'.$rows['Telefono'].'</td>';
+		echo '<td>'.$rows['Telefono'].'</td>';
 		echo '<td>'.$rows['Direccion'].'</td>';
+		echo '<td>'.$rows['Cod_Tag'].'</td>';
+	
+
+		echo '<td>';
+		$estado=$rows['Estado'];
+		
+		if($estado==1){
+		
+			echo "ACTIVO";
+		}
+		elseif ($estado==2) {
+			echo "INACTIVO";
+			# code...
+		}else{
+			echo "Cargar Estado";
+		}
+		
 		echo '</tr>';
-		
-		
+
 		
 	}
 

@@ -75,7 +75,7 @@ select
 																			{	
 										name: "Cliente",
 										icon: "imagenes/invitado.png",
-																			items:[
+										items:[
 																				]
 										}	
 										,						{	
@@ -124,13 +124,13 @@ select
 																				]
 										}
 										,{	
-										name: "Lista Usuario",
+										name: "Listar Usuario",
 										icon: "imagenes/listar.png",
 										items:[
 																				]
 										}
 										,				]
-									},
+										},
 												{
 										name: " Nuevo Vehiculo", 
 										icon: "imagenes/auto.png",
@@ -142,8 +142,8 @@ select
 																				]
 										}
 										,				]
-									},
-									{	
+										},
+										{	
 										name: "Planes",
 										icon: "imagenes/comunicafiles.png",
 										items:[
@@ -177,28 +177,34 @@ select
 																				]
 										}		
 																		]
-								}		
-								
-								,	
-								{
-								name: "Usuarios", 
-								icon: "imagenes/usuarios.png",
-								items:[
-																]
-								}							
-								,	
-								{
-								name: "Reportes", 
-								icon: "imagenes/reportes.png",
-								items:[
-																]
-								}
-								,	
-								{
-								name: "Configuracion", 
-								icon: "imagenes/configuracion.png",
-								items:[
-								
+										}		
+										
+										,	
+									{
+									name: "Usuarios", 
+									icon: "imagenes/usuarios.png",
+									items:[
+																	]
+									}							
+									,	
+										
+									{
+									name: "Cobranza", 
+									icon: "imagenes/pago.png",
+									items:[
+																	]
+									},{
+									name: "Reportes", 
+									icon: "imagenes/reportes.png",
+									items:[
+																	]
+									}
+									,	
+									{
+									name: "Configuracion", 
+									icon: "imagenes/configuracion.png",
+									items:[
+										
 										
 										
 										{	
@@ -227,52 +233,54 @@ select
 																				]
 										}
 												
-										,									]
-								}
-								,	
-								{
-								name: "Login", 
-								icon: "imagenes/login.png",
-								items:[
-																]
-								}		
-								,	
-								{
-								name: "Logout", 
-								icon: "imagenes/logout.png",
-								items:[
-																]
-								}		
-													]
-			},
-			function(optionClicked)
-			{
-				posicion   = optionClicked.lastIndexOf('.');				
-				seleccion  = optionClicked.substring(posicion+1);
-				seleccion  = seleccion.toUpperCase();
-				var url = "";
-<?php
-				$archivoconfiguracion = "ScreenMenu_Ligas.lay";
-				$archivo              = file($archivoconfiguracion);
-				#Dibujamos el javascript para los urls
-				for($i=0;$i<(sizeof($archivo)); $i++){
-					$campovalidar   = explode("|",$archivo[$i]);
-					$leyenda        = trim($campovalidar[0]);
-					$url            = trim($campovalidar[1]);
+									,									]
+									}
+									,	
+										{
+										name: "Login", 
+										icon: "imagenes/login.png",
+										items:[
+																		]
+										}		
+										,	
+										{
+										name: "Logout", 
+										icon: "imagenes/logout.png",
+										items:[
+																		]
+										}		
+														
+															]
+										},
+
+						function(optionClicked)
+						{
+							posicion   = optionClicked.lastIndexOf('.');				
+							seleccion  = optionClicked.substring(posicion+1);
+							seleccion  = seleccion.toUpperCase();
+							var url = "";
+			<?php
+							$archivoconfiguracion = "ScreenMenu_Ligas.lay";
+							$archivo              = file($archivoconfiguracion);
+							#Dibujamos el javascript para los urls
+							for($i=0;$i<(sizeof($archivo)); $i++){
+								$campovalidar   = explode("|",$archivo[$i]);
+								$leyenda        = trim($campovalidar[0]);
+								$url            = trim($campovalidar[1]);
+								
+								echo 'if (seleccion=="'.$leyenda.'"){';
+								echo 'url = "'.$url.'"';
+								echo "}";
+							}
+
+			 ?>				
+							window.parent.frames['Principal'].location.href = url;
+						}
+					);
+				});
+				</script>
+
 					
-					echo 'if (seleccion=="'.$leyenda.'"){';
-					echo 'url = "'.$url.'"';
-					echo "}";
-				}
-
- ?>				
-				window.parent.frames['Principal'].location.href = url;
-			}
-		);
-	});
-	</script>
-
-		
-	
-	</body>
-</html>
+				
+				</body>
+			</html>

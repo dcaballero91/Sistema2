@@ -16,7 +16,7 @@ function ValidarRequeridos(){
 	ajax = newAjax();	
 	
 	ajax.open("POST", "Configuracion/GuardaVehiculo.php",true);
-	ajax.onreadystatechange=function() {
+	ajax.onreadystatechange=function() { 
 		if (ajax.readyState==4) {
 			//mostrar resultados en esta capa
 			divResultado.innerHTML = ajax.responseText
@@ -92,15 +92,17 @@ echo '<tr>';
 	Pie($boton,$javascript);
 	echo '</form>';
 ?>
+
 <center>
 <br/>
 <div style="OVERFLOW:auto;WIDTH:1200px;HEIGHT:300px">
-<table id="table" border=0 cellpadding="0" cellspacing="0">
+<table id="table" border=0 cellpadding="0" cellspacing="0" class="editinplace">
 <thead>
 <tr><th>ID CLIENTE</th>
-<th>NOMBRE APELLIDO</th>
-<th>CI</th>
+<th>NOMBRE</th>
+<th>APELLIDO</th>
 <th>TELEFONO</th>
+<th>CI</th>
 <th>DIRECCION</th>
 <th>ID TAG</th>
 <th>TAG ESTADO</th>
@@ -112,55 +114,69 @@ echo '<tr>';
 <tr>
 </thead>
 <tbody id="tbody">
-<?php
-$contador = 0;
-$sql      = "SELECT cliente.idCliente,persona.Nombre, persona.Apellido, persona.ci, persona.Telefono,cliente.Direccion, tag.Cod_Tag,tag.Estado,vehiculo.Marca, vehiculo.Modelo, vehiculo.Matricula, vehiculo.Chasis,planes.COSTO FROM persona INNER JOIN cliente INNER JOIN tag inner join vehiculo inner JOIN planes where persona.idPersona = cliente.IdPersona and cliente.idCliente = tag.IdCliente AND tag.IdTag = vehiculo.IdTag AND vehiculo.ID = planes.ID ";
-$rs       = mysql_query($sql,$conexion);
-if(mysql_num_rows($rs)!=0){
-	while($rows = mysql_fetch_assoc($rs)){
-		$tipo        = "Administrador";
-		$contador	 = $contador + 1;
-		$body		 = "odd";	
-		
-		echo '</td>';
-			echo '<td>'.$rows['idCliente'].'</td>';
-		echo '<td>'.$rows['Nombre'].' '.$rows['Apellido'].'</td>';
-		echo '<td>'.$rows['ci'].'</td>';		
-				echo '<td>'.$rows['Telefono'].'</td>';
-		echo '<td>'.$rows['Direccion'].'</td>';
-		echo '<td>'.$rows['Cod_Tag'].'</td>';
-		
-		echo '<td>';
-		$estado=$rows['Estado'];
-		
-		if($estado==1){
-		
-			echo "ACTIVO";
-		}
-		elseif ($estado==2) {
-			echo "INACTIVO";
-			# code...
-		}else{
-			echo "Cargar Estado";
-		}
-		echo '</td>';
-		echo '<td>'.$rows['Marca'].'</td>';
-		echo '<td>'.$rows['Modelo'].'</td>';
-		echo '<td>'.$rows['Matricula'].'</td>';
-		echo '<td>'.$rows['Chasis'].'</td>';
-		echo '<td>'.$rows['COSTO'].'</td>';
-		echo '</tr>';
-		
-		
-		
-	}
 
-}else{
-	echo "<tr><td colspan='8'><center><img src='imagenes/error.png'/> No Hay Registros</center></td></tr>";
-}
-
-?>
-</tbody>
-</table>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	
+	<script>
+		
+	$(document).ready(function() 
+	{
+		/* OBTENEMOS TABLA */
+		$.ajax({
+			type: "GET",
+			url: "editVehiculo.php?tabla=1"
+		})
+		.done(function(json) {
+			json = $.parseJSON(json)
+			for(var i=0;i<json.length;i++)
+			{
+				$('.editinplace').append(
+					"<tr><td class='id'>"+json[i].id+"</td><td class='editable' data-campo='Nombre'><span>"+json[i].nombre+"</span></td><td class='editable' data-campo='Apellido'><span>"+json[i].apellido+"</span></td><td class='editable' data-campo='Telefono'><span>"+json[i].telefono+"</span></td><td class='editable' data-campo='ci'><span>"+json[i].ci+"</span></td><td class='editable' data-campo='direccion'><span>"+json[i].direccion+"</span></td><td class='id' data-campo='idtag'><span>"+json[i].idtag+"</span></td><td class='editable' data-campo='tagestado'><span>"+json[i].tagestado+"</span></td><td class='editable' data-campo='marca'><span>"+json[i].marca+"</span></td><td class='editable' data-campo='modelo'><span>"+json[i].modelo+"</span></td><td class='editable' data-campo='matricula'><span>"+json[i].matricula+"</span></td><td class='editable' data-campo='chasis'><span>"+json[i].chasis+"</span></td><td class='id' data-campo='costo'><span>"+json[i].costo+"</span></td></tr>");
+			}
+		});
+		
+		var td,campo,valor,id;
+		$(document).on("click","td.editable span",function(e)
+		{
+			e.preventDefault();
+			$("td:not(.id)").removeClass("editable");
+			td=$(this).closest("td");
+			campo=$(this).closest("td").data("campo");
+			valor=$(this).text();
+			id=$(this).closest("tr").find(".id").text();
+			td.text("").html("<input type='text' name='"+campo+"' value='"+valor+"'><a class='enlace guardar' href='#'>Guardar</a><a class='enlace cancelar' href='#'>Cancelar</a>");
+		});
+		
+		$(document).on("click",".cancelar",function(e)
+		{
+			e.preventDefault();
+			td.html("<span>"+valor+"</span>");
+			$("td:not(.id)").addClass("editable");
+		});
+		
+		$(document).on("click",".guardar",function(e)
+		{
+			$(".mensaje").html("<img src='loading.gif'>");
+			e.preventDefault();
+			nuevovalor=$(this).closest("td").find("input").val();
+			if(nuevovalor.trim()!="")
+			{
+				$.ajax({
+					type: "POST",
+					url: "editVehiculo.php",
+					data: { campo: campo, valor: nuevovalor, id:id }
+				})
+				.done(function( msg ) {
+					$(".mensaje").html(msg);
+					td.html("<span>"+nuevovalor+"</span>");
+					$("td:not(.id)").addClass("editable");
+					setTimeout(function() {$('.ok,.ko').fadeOut('fast');}, 3000);
+				});
+			}
+			else $(".mensaje").html("<p class='error-box round'>Debes ingresar un valor</p>");
+		});
+	});
+	
+	</script>
 </div>
 </center>

@@ -1,3 +1,6 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="dist/jquery.tabledit.js"></script>
+<script type="text/javascript" src="custom_table_edit.js"></script>
 <script src="js/ajax.js" type="text/javascript"></script>
 <link href="css/Estilo.css" rel="stylesheet" type="text/css"/>
 <script LANGUAGE="JavaScript">
@@ -23,7 +26,7 @@ function ValidarRequeridos(){
 }
 </script>
 <?php
-	include('DibujaVentana.php');
+	include('DibujaVentana2.php');
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
