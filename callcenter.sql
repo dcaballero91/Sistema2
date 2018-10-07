@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-09-2018 a las 02:48:14
+-- Tiempo de generación: 07-10-2018 a las 23:26:01
 -- Versión del servidor: 10.1.34-MariaDB
 -- Versión de PHP: 5.6.37
 
@@ -33,7 +33,7 @@ CREATE TABLE `accesousuarios` (
   `USUARIO` int(11) NOT NULL,
   `PROTECCION` int(11) NOT NULL,
   `ESTATUS` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `accesousuarios`
@@ -75,7 +75,40 @@ INSERT INTO `accesousuarios` (`ID`, `USUARIO`, `PROTECCION`, `ESTATUS`) VALUES
 (33, 3, 17, 1),
 (34, 3, 18, 1),
 (35, 3, 19, 1),
-(36, 3, 20, 1);
+(36, 3, 20, 1),
+(37, 1, 17, 1),
+(38, 1, 18, 1),
+(39, 1, 19, 1),
+(40, 1, 20, 1),
+(41, 1, 21, 1),
+(42, 1, 22, 1),
+(43, 1, 23, 1),
+(44, 1, 24, 1),
+(45, 1, 25, 1),
+(46, 1, 26, 1),
+(47, 1, 27, 1),
+(48, 1, 28, 1),
+(49, 1, 29, 1),
+(50, 1, 30, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `barrera`
+--
+
+CREATE TABLE `barrera` (
+  `IdBarrera` int(11) NOT NULL,
+  `IdUsuario` int(11) NOT NULL,
+  `Nro_Barrera` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `barrera`
+--
+
+INSERT INTO `barrera` (`IdBarrera`, `IdUsuario`, `Nro_Barrera`) VALUES
+(1, 1, 'barrera 1');
 
 -- --------------------------------------------------------
 
@@ -85,9 +118,9 @@ INSERT INTO `accesousuarios` (`ID`, `USUARIO`, `PROTECCION`, `ESTATUS`) VALUES
 
 CREATE TABLE `catalogos` (
   `ID` int(11) NOT NULL,
-  `DESCRIPCION` varchar(50) COLLATE latin1_spanish_ci NOT NULL,
+  `DESCRIPCION` varchar(50) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
   `ESTATUS` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `catalogos`
@@ -96,12 +129,12 @@ CREATE TABLE `catalogos` (
 INSERT INTO `catalogos` (`ID`, `DESCRIPCION`, `ESTATUS`) VALUES
 (1, 'INICIO', 0),
 (2, 'MIS CLIENTES', 0),
-(3, 'NUEVO CLIENTE', 0),
+(3, 'COBRANZA', 0),
 (4, 'CARGAR EXCEL', 0),
 (5, 'PROCESAR EXCEL', 0),
 (6, 'USUARIOS', 0),
 (7, 'REPORTES', 0),
-(8, 'TIPIFICACION', 0),
+(8, 'LISTA USUARIO ', 0),
 (9, 'PLANES', 0),
 (10, 'PERMISOS', 0),
 (11, 'ASIGNAR PERMISOS', 0),
@@ -112,8 +145,18 @@ INSERT INTO `catalogos` (`ID`, `DESCRIPCION`, `ESTATUS`) VALUES
 (16, 'RESPALDAR BASE DE DATOS MYSQL', 0),
 (17, 'PERSONA', 0),
 (18, 'TAG', 0),
-(19, 'VEHICULO', 0),
-(20, 'CLIENTE', 0);
+(20, 'CLIENTE', 0),
+(21, 'PERSONA', 0),
+(22, 'LISTAR PERSONA', 0),
+(23, 'LISTAR CLIENTE', 0),
+(24, 'PASO', 0),
+(25, 'LISTAR TAG', 0),
+(26, 'VEHICULO', 0),
+(27, 'LISTAR USUARIO', 0),
+(28, 'LISTAR VEHICULO', 0),
+(29, 'EQUIPO', 0),
+(30, 'LISTAR EQUIPOS', 0),
+(31, 'LIBERAR', 0);
 
 -- --------------------------------------------------------
 
@@ -144,30 +187,64 @@ INSERT INTO `categoria` (`idcat`, `nro_cat`, `cantidad_eje`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clientes`
+-- Estructura de tabla para la tabla `cliente`
 --
 
-CREATE TABLE `clientes` (
-  `ID` int(11) NOT NULL,
-  `NOMBRE` varchar(50) NOT NULL,
-  `APELLIDOS` varchar(50) NOT NULL,
-  `CI` varchar(30) NOT NULL,
-  `DIRECCION` varchar(250) NOT NULL,
-  `TELEFONO` varchar(20) NOT NULL,
-  `FECHA_REGISTRO` varchar(20) NOT NULL,
-  `ID_PLAN` int(11) NOT NULL,
-  `VISIBLE` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `cliente` (
+  `idCliente` int(11) NOT NULL,
+  `IdPersona` int(11) NOT NULL,
+  `Ci` varchar(45) NOT NULL,
+  `Direccion` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `clientes`
+-- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `clientes` (`ID`, `NOMBRE`, `APELLIDOS`, `CI`, `DIRECCION`, `TELEFONO`, `FECHA_REGISTRO`, `ID_PLAN`, `VISIBLE`) VALUES
-(2, 'NOMBRE', 'APELLIDO', '4874055', 'BENJAMIN ACEVAL C EUSEBIO AYALA', '4564', '2018-09-12 09:56:50', 788, 0),
-(3, 'NOMBRE', 'APELLIDO', '12345', 'PRUEBA', '4454', '2018-09-12 10:00:17', 789, 0),
-(4, 'NOMBRE', 'APELLIDO', '123456', 'PRUEBA', '4454', '2018-09-12 10:01:19', 790, 0),
-(5, 'NOSE', 'NOSE', 'NOSE', 'NOSE', 'nose', '2018-09-12 13:06:11', 791, 0);
+INSERT INTO `cliente` (`idCliente`, `IdPersona`, `Ci`, `Direccion`) VALUES
+(1, 2, '4874066', 'ESPAÃ±A'),
+(2, 2, '4874055', 'Mariscal lopez'),
+(3, 3, '589602', 'san isidro'),
+(4, 4, '4874560', 'VENEZUELA');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `distrito`
+--
+
+CREATE TABLE `distrito` (
+  `IdDistrito` int(11) NOT NULL,
+  `IdBarrera` int(11) NOT NULL,
+  `Nombre` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `distrito`
+--
+
+INSERT INTO `distrito` (`IdDistrito`, `IdBarrera`, `Nombre`) VALUES
+(1, 1, 'Ypacarai');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `equipos`
+--
+
+CREATE TABLE `equipos` (
+  `idEquipos` int(11) NOT NULL,
+  `nombre_equipo` varchar(45) NOT NULL,
+  `idbarrera_equipos` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `equipos`
+--
+
+INSERT INTO `equipos` (`idEquipos`, `nombre_equipo`, `idbarrera_equipos`) VALUES
+(1, 'NOSE', 1),
+(2, 'EQUIPO', 1);
 
 -- --------------------------------------------------------
 
@@ -183,15 +260,6 @@ CREATE TABLE `log` (
   `COMANDO` varchar(300) NOT NULL,
   `FECHA` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `log`
---
-
-INSERT INTO `log` (`ID`, `USUARIO`, `TABLA`, `ACCION`, `COMANDO`, `FECHA`) VALUES
-(1, 1, 'log_llamadas', 'TRUNCATE', 'TRUNCATE TABLE log_llamadas;', '2014-01-22 10:52:39'),
-(2, 1, 'log_llamadas', 'TRUNCATE', 'TRUNCATE TABLE log_llamadas;', '2014-01-22 10:53:44'),
-(3, 1, 'clientes', 'TRUNCATE', 'TRUNCATE TABLE clientes;', '2018-09-12 09:27:12');
 
 -- --------------------------------------------------------
 
@@ -213,6 +281,28 @@ CREATE TABLE `log_llamadas` (
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `lstvehiculos`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `lstvehiculos` (
+`idCliente` int(11)
+,`Nombre` varchar(45)
+,`Apellido` varchar(45)
+,`ci` varchar(45)
+,`Telefono` varchar(45)
+,`Direccion` varchar(45)
+,`Cod_Tag` varchar(45)
+,`Estado` varchar(45)
+,`Marca` varchar(45)
+,`Modelo` varchar(45)
+,`Matricula` varchar(45)
+,`Chasis` varchar(45)
+,`COSTO` double
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `persona`
 --
 
@@ -221,8 +311,24 @@ CREATE TABLE `persona` (
   `Nombre` varchar(45) NOT NULL,
   `Apellido` varchar(45) NOT NULL,
   `Correo` varchar(45) NOT NULL,
-  `Telefono` varchar(45) NOT NULL
+  `Telefono` varchar(45) NOT NULL,
+  `ci` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `persona`
+--
+
+INSERT INTO `persona` (`idPersona`, `Nombre`, `Apellido`, `Correo`, `Telefono`, `ci`) VALUES
+(1, 'damian', 'APELLIDO', 'MMM@MMMM', '0981187124', '480'),
+(2, 'Pedro', 'APELLIDO', 'pedro@gmail.com', '0971733880', '5555'),
+(3, 'PABLO', 'caceres', 'MMM@MMMM', '0992568214', '8787'),
+(4, 'pedro', 'CACERES', 'MMM@MMMM', '0981325783', '5685'),
+(5, 'PEDRO', 'CACERES', 'MMM@MMMM', '0971733880', '4874055'),
+(6, 'PRUEBA', 'PRUEBA', 'MMM@MMMM', '0971733880', '8888'),
+(7, 'Pablo', 'caceres', 'MMM@MMMM', '0971733880', '8989'),
+(8, 'NOMBRE', 'TRECE', 'MMM@MMMM', '0971733880', '7842'),
+(9, 'PEDRO', 'CACERES', 'MMM@MMMM', '0971733880', '9999');
 
 -- --------------------------------------------------------
 
@@ -232,22 +338,21 @@ CREATE TABLE `persona` (
 
 CREATE TABLE `planes` (
   `ID` int(11) NOT NULL,
-  `DESCRIPCION` varchar(100) NOT NULL,
-  `COSTO` varchar(50) NOT NULL,
-  `ESTATUS` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `DESCRIPCION` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `Costo` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `planes`
 --
 
-INSERT INTO `planes` (`ID`, `DESCRIPCION`, `COSTO`, `ESTATUS`) VALUES
-(5, 'LIVIANO', '5000', 0),
-(6, 'CAMIONES Y Ã³MNIBUS CON DOS EJES', '10000', 0),
-(7, 'VEHÃ­CULOS LIVIANOS CON ACOPLADOS', '10000', 0),
-(8, 'CAMIONES CON 03 (TRES) EJES', '15000', 0),
-(9, 'CAMIONES CON MÃ¡S DE 03 (TRES) EJES', '20000', 0),
-(10, 'NINGUNO', '0', 0);
+INSERT INTO `planes` (`ID`, `DESCRIPCION`, `Costo`) VALUES
+(5, 'LIVIANO', 5000),
+(6, 'CAMIONES Y Ã³MNIBUS CON DOS EJES', 10000),
+(7, 'VEHÃ­CULOS LIVIANOS CON ACOPLADOS', 10000),
+(8, 'CAMIONES CON 03 (TRES) EJES', 15000),
+(9, 'CAMIONES CON MÃ¡S DE 03 (TRES) EJES', 20000),
+(10, 'NINGUNO', 0);
 
 -- --------------------------------------------------------
 
@@ -1058,7 +1163,1361 @@ INSERT INTO `plan_clientes` (`ID`, `NOMBRE_PLAN`, `FECHA_ACTIVACION`, `TELEFONO`
 (788, 'LIVIANO ', '2018-09-12 09:56:50', '4564', 0),
 (789, 'LIVIANO ', '2018-09-12 10:00:17', '4454', 0),
 (790, 'LIVIANO ', '2018-09-12 10:01:19', '4454', 0),
-(791, 'CAMIONES CON 03 (TRES) EJES ', '2018-09-12 13:06:11', 'nose', 0);
+(791, 'CAMIONES CON 03 (TRES) EJES ', '2018-09-12 13:06:11', 'nose', 0),
+(792, 'CAMIONES CON 03 (TRES) EJES ', '2018-09-13 09:02:39', '2', 0),
+(793, '0', '2018-09-13 11:13:43', '4454', 0),
+(794, 'CAMIONES CON 03 (TRES) EJES ', '2018-09-13 11:14:34', '4564', 0),
+(795, '', '2018-09-13 13:48:38', '4454', 0),
+(796, '', '2018-09-13 13:49:16', '4454', 0),
+(797, '', '2018-09-13 13:50:02', '4454', 0),
+(798, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(799, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(800, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(801, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(802, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(803, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(804, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(805, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0);
+INSERT INTO `plan_clientes` (`ID`, `NOMBRE_PLAN`, `FECHA_ACTIVACION`, `TELEFONO`, `ESTATUS`) VALUES
+(806, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(807, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(808, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(809, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(810, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(811, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(812, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(813, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(814, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(815, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(816, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(817, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(818, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(819, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(820, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(821, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(822, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(823, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(824, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(825, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(826, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(827, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(828, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(829, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(830, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(831, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(832, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(833, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(834, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(835, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(836, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(837, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(838, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(839, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(840, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(841, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(842, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(843, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(844, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(845, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(846, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(847, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(848, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(849, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(850, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(851, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(852, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(853, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(854, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(855, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(856, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(857, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(858, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(859, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(860, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(861, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(862, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(863, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(864, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(865, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(866, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(867, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(868, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(869, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(870, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(871, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(872, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(873, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(874, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(875, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(876, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(877, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(878, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(879, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(880, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(881, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(882, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(883, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(884, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(885, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(886, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(887, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(888, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(889, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(890, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(891, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(892, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(893, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(894, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(895, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(896, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(897, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(898, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(899, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(900, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(901, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(902, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(903, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(904, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(905, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(906, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(907, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(908, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(909, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(910, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(911, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(912, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(913, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(914, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(915, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(916, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(917, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(918, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(919, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(920, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(921, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(922, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(923, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(924, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(925, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(926, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(927, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(928, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(929, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(930, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(931, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(932, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(933, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(934, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(935, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(936, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(937, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(938, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(939, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(940, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(941, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(942, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(943, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(944, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(945, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(946, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(947, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(948, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(949, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(950, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(951, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(952, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(953, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(954, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(955, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(956, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(957, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(958, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(959, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(960, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(961, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(962, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(963, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(964, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(965, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(966, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(967, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(968, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(969, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(970, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(971, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(972, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(973, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(974, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(975, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(976, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(977, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(978, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(979, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(980, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(981, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(982, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(983, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(984, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(985, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(986, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(987, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(988, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(989, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(990, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(991, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(992, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(993, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(994, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(995, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(996, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(997, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(998, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(999, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1000, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1001, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1002, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1003, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1004, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1005, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1006, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1007, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1008, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1009, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1010, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1011, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1012, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1013, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1014, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1015, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1016, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1017, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1018, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1019, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1020, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1021, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1022, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1023, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1024, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1025, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1026, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1027, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1028, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1029, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1030, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1031, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1032, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1033, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1034, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1035, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1036, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1037, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1038, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1039, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1040, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1041, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1042, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1043, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1044, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1045, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1046, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1047, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1048, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1049, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1050, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1051, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1052, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1053, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1054, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1055, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1056, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1057, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1058, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1059, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1060, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1061, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1062, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1063, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1064, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1065, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1066, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1067, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1068, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1069, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1070, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1071, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1072, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1073, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1074, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1075, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1076, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1077, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1078, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1079, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1080, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1081, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1082, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1083, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1084, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1085, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1086, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1087, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1088, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1089, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1090, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1091, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1092, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1093, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1094, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1095, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1096, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1097, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1098, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1099, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1100, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1101, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1102, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1103, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1104, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1105, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1106, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1107, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1108, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1109, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1110, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1111, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1112, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1113, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1114, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1115, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1116, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1117, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1118, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1119, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1120, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1121, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1122, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1123, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1124, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1125, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1126, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1127, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1128, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1129, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1130, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1131, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1132, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1133, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1134, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1135, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1136, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1137, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1138, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1139, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1140, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1141, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1142, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1143, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1144, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1145, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1146, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1147, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1148, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1149, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1150, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1151, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1152, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1153, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1154, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1155, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1156, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1157, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1158, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1159, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1160, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1161, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1162, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1163, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1164, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1165, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1166, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1167, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1168, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1169, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1170, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1171, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1172, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1173, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1174, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1175, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1176, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1177, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1178, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1179, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1180, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1181, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1182, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1183, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1184, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1185, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1186, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1187, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1188, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1189, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1190, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1191, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1192, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1193, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1194, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1195, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1196, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1197, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1198, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1199, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1200, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1201, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1202, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1203, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1204, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1205, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1206, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1207, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1208, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1209, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1210, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1211, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1212, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1213, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1214, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1215, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1216, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1217, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1218, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1219, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1220, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1221, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1222, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1223, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1224, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1225, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1226, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1227, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1228, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1229, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1230, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1231, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1232, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1233, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1234, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1235, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1236, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1237, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1238, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1239, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1240, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1241, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1242, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1243, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1244, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1245, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1246, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1247, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1248, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1249, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1250, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1251, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1252, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1253, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1254, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1255, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1256, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1257, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1258, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1259, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1260, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1261, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1262, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1263, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1264, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1265, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1266, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1267, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1268, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1269, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1270, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1271, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1272, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1273, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1274, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1275, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1276, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1277, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1278, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1279, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1280, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1281, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1282, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1283, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1284, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1285, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1286, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1287, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1288, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1289, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1290, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1291, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1292, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1293, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1294, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1295, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1296, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1297, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1298, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1299, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1300, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1301, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1302, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1303, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1304, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1305, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1306, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1307, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1308, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1309, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1310, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1311, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1312, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1313, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1314, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1315, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1316, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1317, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1318, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1319, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1320, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1321, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1322, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1323, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1324, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1325, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1326, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1327, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1328, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1329, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1330, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1331, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1332, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1333, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1334, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1335, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1336, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1337, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1338, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1339, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1340, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1341, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1342, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1343, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1344, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1345, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1346, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1347, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1348, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1349, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1350, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1351, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1352, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1353, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1354, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1355, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1356, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1357, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1358, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1359, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1360, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1361, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1362, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1363, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1364, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1365, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1366, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1367, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1368, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1369, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1370, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1371, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1372, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1373, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1374, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1375, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1376, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1377, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1378, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1379, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1380, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1381, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1382, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1383, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1384, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1385, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1386, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1387, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1388, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1389, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1390, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1391, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1392, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1393, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1394, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1395, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1396, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1397, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1398, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1399, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1400, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1401, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1402, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1403, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1404, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1405, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1406, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1407, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1408, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1409, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1410, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1411, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1412, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1413, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1414, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1415, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1416, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1417, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1418, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1419, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1420, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1421, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1422, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1423, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1424, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1425, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1426, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1427, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1428, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1429, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1430, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1431, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1432, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1433, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1434, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1435, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1436, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1437, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1438, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1439, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1440, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1441, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1442, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1443, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1444, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1445, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1446, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1447, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1448, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1449, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1450, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1451, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1452, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1453, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1454, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1455, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1456, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1457, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1458, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1459, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1460, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1461, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1462, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1463, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1464, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1465, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1466, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1467, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1468, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1469, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1470, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1471, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1472, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1473, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1474, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1475, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1476, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1477, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1478, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1479, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1480, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1481, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1482, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1483, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1484, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1485, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1486, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1487, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1488, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1489, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1490, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1491, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1492, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1493, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1494, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1495, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1496, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1497, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1498, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1499, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1500, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1501, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1502, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1503, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1504, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1505, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1506, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1507, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1508, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1509, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1510, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1511, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1512, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1513, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1514, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1515, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1516, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1517, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1518, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1519, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1520, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1521, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1522, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1523, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1524, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1525, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1526, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1527, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1528, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1529, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1530, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1531, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1532, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1533, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1534, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1535, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1536, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1537, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1538, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1539, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1540, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1541, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1542, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1543, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1544, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1545, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1546, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1547, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1548, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1549, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1550, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1551, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1552, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1553, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1554, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1555, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1556, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1557, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1558, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1559, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1560, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1561, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1562, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1563, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1564, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1565, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1566, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1567, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1568, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1569, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1570, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1571, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1572, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1573, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1574, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1575, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1576, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1577, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1578, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1579, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1580, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1581, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1582, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1583, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1584, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1585, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1586, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1587, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1588, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0);
+INSERT INTO `plan_clientes` (`ID`, `NOMBRE_PLAN`, `FECHA_ACTIVACION`, `TELEFONO`, `ESTATUS`) VALUES
+(1589, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1590, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1591, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1592, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1593, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1594, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1595, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1596, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1597, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1598, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1599, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1600, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1601, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1602, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1603, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1604, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1605, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1606, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1607, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1608, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1609, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1610, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1611, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1612, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1613, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1614, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1615, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1616, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1617, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1618, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1619, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1620, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1621, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1622, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1623, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1624, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1625, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1626, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1627, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1628, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1629, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1630, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1631, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1632, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1633, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1634, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1635, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1636, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1637, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1638, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1639, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1640, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1641, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1642, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1643, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1644, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1645, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1646, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1647, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1648, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1649, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1650, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1651, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1652, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1653, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1654, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1655, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1656, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1657, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1658, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1659, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1660, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1661, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1662, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1663, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1664, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1665, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1666, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1667, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1668, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1669, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1670, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1671, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1672, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1673, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1674, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1675, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1676, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1677, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1678, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1679, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1680, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1681, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1682, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1683, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1684, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1685, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1686, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1687, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1688, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1689, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1690, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1691, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1692, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1693, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1694, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1695, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1696, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1697, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1698, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1699, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1700, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1701, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1702, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1703, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1704, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1705, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1706, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1707, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1708, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1709, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1710, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1711, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1712, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1713, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1714, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1715, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1716, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1717, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1718, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1719, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1720, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1721, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1722, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1723, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1724, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1725, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1726, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1727, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1728, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1729, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1730, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1731, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1732, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1733, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1734, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1735, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1736, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1737, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1738, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1739, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1740, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1741, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1742, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1743, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1744, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1745, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1746, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1747, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1748, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1749, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1750, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1751, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1752, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1753, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1754, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1755, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1756, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1757, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1758, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1759, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1760, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1761, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1762, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1763, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1764, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1765, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1766, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1767, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1768, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1769, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1770, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1771, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1772, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1773, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1774, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1775, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1776, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1777, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1778, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1779, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1780, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1781, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1782, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1783, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1784, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1785, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1786, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1787, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1788, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1789, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1790, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1791, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1792, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1793, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1794, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1795, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1796, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1797, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1798, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1799, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1800, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1801, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1802, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1803, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1804, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1805, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1806, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1807, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1808, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1809, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1810, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1811, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1812, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1813, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1814, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1815, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1816, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1817, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1818, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1819, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1820, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1821, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1822, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1823, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1824, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1825, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1826, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1827, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1828, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1829, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1830, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1831, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1832, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1833, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1834, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1835, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1836, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1837, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1838, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1839, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1840, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1841, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1842, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1843, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1844, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1845, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1846, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1847, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1848, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1849, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1850, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1851, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1852, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1853, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1854, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1855, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1856, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1857, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1858, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1859, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1860, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1861, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1862, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1863, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1864, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1865, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1866, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1867, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1868, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1869, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1870, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1871, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1872, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1873, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1874, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1875, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1876, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1877, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1878, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1879, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1880, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1881, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1882, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1883, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1884, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1885, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1886, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1887, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1888, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1889, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1890, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1891, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1892, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1893, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1894, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1895, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1896, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1897, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1898, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1899, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1900, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1901, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1902, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1903, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1904, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1905, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1906, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1907, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1908, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1909, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1910, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1911, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1912, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1913, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(1914, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(1915, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(1916, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(1917, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(1918, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(1919, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(1920, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(1921, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(1922, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(1923, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(1924, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(1925, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(1926, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(1927, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(1928, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(1929, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(1930, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(1931, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(1932, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(1933, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(1934, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(1935, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(1936, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(1937, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(1938, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(1939, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(1940, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(1941, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(1942, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(1943, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(1944, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(1945, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(1946, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(1947, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(1948, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(1949, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(1950, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(1951, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(1952, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(1953, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(1954, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(1955, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(1956, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(1957, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(1958, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(1959, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(1960, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(1961, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(1962, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(1963, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(1964, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(1965, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(1966, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(1967, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(1968, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(1969, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(1970, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(1971, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(1972, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(1973, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(1974, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(1975, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(1976, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(1977, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(1978, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(1979, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(1980, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(1981, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(1982, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(1983, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(1984, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(1985, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(1986, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(1987, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(1988, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(1989, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(1990, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(1991, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(1992, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(1993, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(1994, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(1995, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0),
+(1996, '1410 Multimedia CC Light 9990', '5-Sep-11', '99479504', 0),
+(1997, '1410 Multimedia CC Light 9990', '21-Mar-13', '57031846', 0),
+(1998, '1418 Cta Cda Red 11.990', '27-Jun-12', '78966874', 0),
+(1999, '1410 Multimedia CC Light 9990', '21-Mar-12', '95766074', 0),
+(2000, '291 CTA CONTROLADA RED 8990', '1-Feb-11', '62246343', 0),
+(2001, '291 CTA CONTROLADA RED 8990', '28-May-11', '95046471', 0),
+(2002, '1418 Cta Cda Red 11.990', '28-Mar-13', '94766066', 0),
+(2003, '291 CTA CONTROLADA RED 8990', '20-Jun-11', '78915135', 0),
+(2004, '291 CTA CONTROLADA RED 8990', '6-Feb-13', '94789073', 0),
+(2005, '291 CTA CONTROLADA RED 8990', '25-Jun-09', '91574789', 0),
+(2006, '291 CTA CONTROLADA RED 8990', '10-Oct-12', '67866035', 0),
+(2007, '1410 Multimedia CC Light 9990', '8-Mar-13', '57105105', 0),
+(2008, '1410 Multimedia CC Light 9990', '8-Apr-13', '94876170', 0),
+(2009, '292 CTA CONTROLADA RED 11990', '2-Mar-11', '87249265', 0),
+(2010, '1410 Multimedia CC Light 9990', '27-Feb-12', '96752584', 0),
+(2011, '291 CTA CONTROLADA RED 8990', '14-Jul-09', '97855656', 0),
+(2012, '291 CTA CONTROLADA RED 8990', '29-Jun-11', '93049542', 0),
+(2013, '291 CTA CONTROLADA RED 8990', '22-Dec-11', '92905769', 0),
+(2014, '291 CTA CONTROLADA RED 8990', '27-Mar-09', '96730733', 0),
+(2015, '286 CC FLAT 12990', '8-Feb-10', '84315732', 0),
+(2016, '291 CTA CONTROLADA RED 8990', '29-Mar-12', '98864831', 0),
+(2017, '291 CTA CONTROLADA RED 8990', '3-Oct-09', '99139074', 0),
+(2018, '291 CTA CONTROLADA RED 8990', '7-Dec-09', '97756660', 0),
+(2019, '291 CTA CONTROLADA RED 8990', '11-May-10', '82368318', 0),
+(2020, '1410 Multimedia CC Light 9990', '13-Oct-12', '84690668', 0),
+(2021, '1418 Cta Cda Red 11.990', '8-Feb-12', '95161646', 0),
+(2022, '1416 Cta Cda 9.990', '30-Jul-13', '81379164', 0),
+(2023, '291 CTA CONTROLADA RED 8990', '13-Sep-12', '87396072', 0),
+(2024, '291 CTA CONTROLADA RED 8990', '9-Nov-09', '93010483', 0),
+(2025, '291 CTA CONTROLADA RED 8990', '27-Dec-12', '56330098', 0),
+(2026, '291 CTA CONTROLADA RED 8990', '16-Mar-11', '82859770', 0),
+(2027, '291 CTA CONTROLADA RED 8990', '17-May-11', '97877306', 0),
+(2028, '291 CTA CONTROLADA RED 8990', '25-Nov-09', '82867029', 0),
+(2029, '1410 Multimedia CC Light 9990', '21-Apr-09', '93588046', 0),
+(2030, '291 CTA CONTROLADA RED 8990', '29-Apr-11', '87278485', 0),
+(2031, '286 CC FLAT 12990', '18-Jan-11', '87414704', 0),
+(2032, '291 CTA CONTROLADA RED 8990', '20-Oct-10', '91514352', 0),
+(2033, '1410 Multimedia CC Light 9990', '25-Jun-13', '57645431', 0),
+(2034, '292 CTA CONTROLADA RED 11990', '28-Dec-11', '82797184', 0),
+(2035, '286 CC FLAT 12990', '12-Dec-12', '84368901', 0),
+(2036, '286 CC FLAT 12990', '13-Jul-12', '95177364', 0),
+(2037, '1410 Multimedia CC Light 9990', '10-Jun-13', '76001311', 0),
+(2038, '285 CC FLAT 9990', '11-Jan-13', '75650570', 0),
+(2039, '1410 Multimedia CC Light 9990', '6-May-11', '77619578', 0),
+(2040, '1410 Multimedia CC Light 9990', '24-Jul-13', '94129984', 0),
+(2041, '1410 Multimedia CC Light 9990', '6-Jun-13', '56324376', 0),
+(2042, '291 CTA CONTROLADA RED 8990', '3-Aug-10', '77512285', 0),
+(2043, '1410 Multimedia CC Light 9990', '8-Nov-11', '62318030', 0),
+(2044, '1410 Multimedia CC Light 9990', '27-Mar-12', '79936633', 0),
+(2045, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '91323512', 0),
+(2046, '1410 Multimedia CC Light 9990', '23-Mar-12', '75448194', 0),
+(2047, '291 CTA CONTROLADA RED 8990', '11-Feb-10', '76578171', 0),
+(2048, '291 CTA CONTROLADA RED 8990', '17-Jan-11', '88118802', 0),
+(2049, '1418 Cta Cda Red 11.990', '24-Mar-12', '77513257', 0),
+(2050, '1410 Multimedia CC Light 9990', '26-May-11', '84145936', 0),
+(2051, '1410 Multimedia CC Light 9990', '14-Jan-11', '79623301', 0),
+(2052, '285 CC FLAT 9990', '15-Sep-09', '84220867', 0),
+(2053, '291 CTA CONTROLADA RED 8990', '28-Dec-09', '87659157', 0),
+(2054, '291 CTA CONTROLADA RED 8990', '28-Nov-12', '66544077', 0),
+(2055, '1410 Multimedia CC Light 9990', '22-Jul-13', '93516284', 0),
+(2056, '291 CTA CONTROLADA RED 8990', '16-Mar-12', '78706533', 0),
+(2057, '291 CTA CONTROLADA RED 8990', '24-May-10', '88172872', 0),
+(2058, '292 CTA CONTROLADA RED 11990', '24-Apr-12', '75355317', 0),
+(2059, '286 CC FLAT 12990', '9-May-12', '75834742', 0),
+(2060, '291 CTA CONTROLADA RED 8990', '10-Apr-12', '76467708', 0),
+(2061, '1410 Multimedia CC Light 9990', '23-Aug-10', '88953789', 0),
+(2062, '291 CTA CONTROLADA RED 8990', '26-Apr-10', '82548271', 0),
+(2063, '1418 Cta Cda Red 11.990', '31-Jul-13', '62157841', 0),
+(2064, '291 CTA CONTROLADA RED 8990', '21-Apr-09', '98807654', 0),
+(2065, '1418 Cta Cda Red 11.990', '5-Nov-12', '99659549', 0),
+(2066, '291 CTA CONTROLADA RED 8990', '26-Sep-11', '96720098', 0),
+(2067, '291 CTA CONTROLADA RED 8990', '11-Jun-10', '91335586', 0),
+(2068, '286 CC FLAT 12990', '24-Feb-11', '84702855', 0),
+(2069, '1416 Cta Cda 9.990', '27-Jan-09', '91200014', 0),
+(2070, '291 CTA CONTROLADA RED 8990', '26-Dec-11', '81864349', 0),
+(2071, '291 CTA CONTROLADA RED 8990', '23-Aug-12', '96909764', 0),
+(2072, '291 CTA CONTROLADA RED 8990', '2-May-12', '94927054', 0),
+(2073, '291 CTA CONTROLADA RED 8990', '19-Aug-10', '82689984', 0),
+(2074, '1410 Multimedia CC Light 9990', '8-Aug-12', '87616571', 0),
+(2075, '1410 Multimedia CC Light 9990', '29-May-13', '73430858', 0),
+(2076, '291 CTA CONTROLADA RED 8990', '26-Oct-09', '88117136', 0),
+(2077, '291 CTA CONTROLADA RED 8990', '18-Aug-11', '81869993', 0),
+(2078, '291 CTA CONTROLADA RED 8990', '10-Sep-12', '75151249', 0),
+(2079, '1410 Multimedia CC Light 9990', '8-Aug-12', '95752472', 0),
+(2080, '291 CTA CONTROLADA RED 8990', '15-Sep-09', '76403230', 0),
+(2081, '1410 Multimedia CC Light 9990', '14-Apr-12', '98218889', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tag`
+--
+
+CREATE TABLE `tag` (
+  `IdTag` int(11) NOT NULL,
+  `IdCliente` int(11) NOT NULL,
+  `Cod_Tag` varchar(45) NOT NULL,
+  `Estado` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tag`
+--
+
+INSERT INTO `tag` (`IdTag`, `IdCliente`, `Cod_Tag`, `Estado`) VALUES
+(1, 1, '123456', '1'),
+(2, 1, '564', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `test`
+--
+
+CREATE TABLE `test` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `code` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `test`
+--
+
+INSERT INTO `test` (`id`, `name`, `code`) VALUES
+(1, '', ''),
+(2, 'aaa', '111'),
+(3, '', ''),
+(4, '', ''),
+(5, '', ''),
+(6, '', ''),
+(7, '', ''),
+(8, '', ''),
+(9, '', ''),
+(10, '', ''),
+(11, '', ''),
+(12, 'pepe', '123456'),
+(13, 'pepe', '123456'),
+(14, 'pepe', '123456'),
+(15, 'pepe', '123456'),
+(16, 'pepe', '123456'),
+(17, 'pepe', '123456'),
+(18, 'pepe', '123456'),
+(19, 'pepe', '123456'),
+(20, 'pepe11111', '123456'),
+(21, 'pepe11111', '123456'),
+(22, 'pepe11111', '123456'),
+(23, 'pepe11111', '123456');
 
 -- --------------------------------------------------------
 
@@ -1082,31 +2541,82 @@ INSERT INTO `tipificacion` (`ID`, `DESCRIPCION`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `transaccion`
+--
+
+CREATE TABLE `transaccion` (
+  `IdTransaccion` int(11) NOT NULL,
+  `IdTag` int(11) NOT NULL,
+  `Cantidad` int(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `transaccion`
+--
+
+INSERT INTO `transaccion` (`IdTransaccion`, `IdTag`, `Cantidad`) VALUES
+(1, 1, 2),
+(2, 2, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
   `ID` int(11) NOT NULL,
   `NOMBRE` varchar(50) NOT NULL,
-  `APELLIDOS` varchar(100) NOT NULL,
-  `CI` varchar(50) NOT NULL,
-  `DIRECCION` varchar(100) DEFAULT NULL,
-  `USUARIO` varchar(50) NOT NULL,
-  `PASSWORD` varchar(50) NOT NULL,
+  `APELLIDOS` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `CI` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `DIRECCION` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `USUARIO` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `PASSWORD` varchar(50) CHARACTER SET latin1 NOT NULL,
   `TIPO_USUARIO` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`ID`, `NOMBRE`, `APELLIDOS`, `CI`, `DIRECCION`, `USUARIO`, `PASSWORD`, `TIPO_USUARIO`) VALUES
-(1, 'ADMIN', 'DEL SITIO', '2189', 'SALINAS 2013', '2189', 'MANUEL2189', 1),
+(1, 'ADMIN', 'ADMINISTRADOR', '2189', 'CASI MARISCAL LOPEZ', '2189', 'MANUEL2189', 1),
 (2, 'DATOS', 'DE PRUEBA', '12345678', 'NO TIENE', '12345678', '12345678', 2),
-(3, 'PEDRO', 'CACERES', '4874055', 'BENJAMIN ACEVAL C EUSEBIO AYALA', '4874055', '5555', 1),
-(4, 'BERNAL', 'BERNAL', '5656', 'PRUEBA', '5656', '5656', 3),
-(5, '11', '1', '1', '1', '1', '1', 1),
-(6, 'NOMBRE', 'APELLIDO', '12345', 'HOLA', '12345', '12345', 1);
+(7, 'NATHALI', 'OCAMPOS', '4874055', 'MARISCAL LOPEZ 390', '4874055', '4874055', 3),
+(8, 'Miguel', 'gonzalez', '4874055', 'E. Ayala', '598400', '4874055', 4),
+(9, 'RAUL', 'FERNANDEZ', '4874056', 'VENEZUELA', '4874056', '4874056', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vehiculo`
+--
+
+CREATE TABLE `vehiculo` (
+  `IdVehiculo` int(11) NOT NULL,
+  `IdTag` int(11) NOT NULL,
+  `Marca` varchar(45) NOT NULL,
+  `Modelo` varchar(45) NOT NULL,
+  `Matricula` varchar(45) NOT NULL,
+  `Chasis` varchar(45) NOT NULL,
+  `ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `vehiculo`
+--
+
+INSERT INTO `vehiculo` (`IdVehiculo`, `IdTag`, `Marca`, `Modelo`, `Matricula`, `Chasis`, `ID`) VALUES
+(1, 1, 'toyota', 'corolla', 'FDT 458', 'SD45F4DS4F54SD6F', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `lstvehiculos`
+--
+DROP TABLE IF EXISTS `lstvehiculos`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `lstvehiculos`  AS  select `cliente`.`idCliente` AS `idCliente`,`persona`.`Nombre` AS `Nombre`,`persona`.`Apellido` AS `Apellido`,`persona`.`ci` AS `ci`,`persona`.`Telefono` AS `Telefono`,`cliente`.`Direccion` AS `Direccion`,`tag`.`Cod_Tag` AS `Cod_Tag`,`tag`.`Estado` AS `Estado`,`vehiculo`.`Marca` AS `Marca`,`vehiculo`.`Modelo` AS `Modelo`,`vehiculo`.`Matricula` AS `Matricula`,`vehiculo`.`Chasis` AS `Chasis`,`planes`.`Costo` AS `COSTO` from ((((`persona` join `cliente`) join `tag`) join `vehiculo`) join `planes`) where ((`persona`.`idPersona` = `cliente`.`IdPersona`) and (`cliente`.`idCliente` = `tag`.`IdCliente`) and (`tag`.`IdTag` = `vehiculo`.`IdTag`) and (`vehiculo`.`ID` = `planes`.`ID`)) ;
 
 --
 -- Índices para tablas volcadas
@@ -1117,6 +2627,13 @@ INSERT INTO `usuarios` (`ID`, `NOMBRE`, `APELLIDOS`, `CI`, `DIRECCION`, `USUARIO
 --
 ALTER TABLE `accesousuarios`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `barrera`
+--
+ALTER TABLE `barrera`
+  ADD PRIMARY KEY (`IdBarrera`),
+  ADD KEY `IdUsuario_idx` (`IdUsuario`);
 
 --
 -- Indices de la tabla `catalogos`
@@ -1131,12 +2648,25 @@ ALTER TABLE `categoria`
   ADD PRIMARY KEY (`idcat`);
 
 --
--- Indices de la tabla `clientes`
+-- Indices de la tabla `cliente`
 --
-ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`ID`),
-  ADD UNIQUE KEY `ID_PLAN` (`ID_PLAN`),
-  ADD UNIQUE KEY `ID_PLAN_2` (`ID_PLAN`);
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`idCliente`),
+  ADD KEY `IdPersona_idx` (`IdPersona`);
+
+--
+-- Indices de la tabla `distrito`
+--
+ALTER TABLE `distrito`
+  ADD PRIMARY KEY (`IdDistrito`),
+  ADD KEY `IdBarrera_idx` (`IdBarrera`);
+
+--
+-- Indices de la tabla `equipos`
+--
+ALTER TABLE `equipos`
+  ADD PRIMARY KEY (`idEquipos`),
+  ADD KEY `idbarrera_idx` (`idbarrera_equipos`);
 
 --
 -- Indices de la tabla `log`
@@ -1169,16 +2699,44 @@ ALTER TABLE `plan_clientes`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indices de la tabla `tag`
+--
+ALTER TABLE `tag`
+  ADD PRIMARY KEY (`IdTag`),
+  ADD KEY `IdCliente_idx` (`IdCliente`);
+
+--
+-- Indices de la tabla `test`
+--
+ALTER TABLE `test`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `tipificacion`
 --
 ALTER TABLE `tipificacion`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indices de la tabla `transaccion`
+--
+ALTER TABLE `transaccion`
+  ADD PRIMARY KEY (`IdTransaccion`),
+  ADD KEY `IdTag_idx` (`IdTag`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indices de la tabla `vehiculo`
+--
+ALTER TABLE `vehiculo`
+  ADD PRIMARY KEY (`IdVehiculo`),
+  ADD KEY `IdTag_idx` (`IdTag`),
+  ADD KEY `IdCategoria_idx` (`ID`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -1188,13 +2746,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `accesousuarios`
 --
 ALTER TABLE `accesousuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT de la tabla `barrera`
+--
+ALTER TABLE `barrera`
+  MODIFY `IdBarrera` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `catalogos`
 --
 ALTER TABLE `catalogos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -1203,16 +2767,28 @@ ALTER TABLE `categoria`
   MODIFY `idcat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `clientes`
+-- AUTO_INCREMENT de la tabla `cliente`
 --
-ALTER TABLE `clientes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `distrito`
+--
+ALTER TABLE `distrito`
+  MODIFY `IdDistrito` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `equipos`
+--
+ALTER TABLE `equipos`
+  MODIFY `idEquipos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `log`
 --
 ALTER TABLE `log`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `log_llamadas`
@@ -1224,7 +2800,7 @@ ALTER TABLE `log_llamadas`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPersona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `planes`
@@ -1236,7 +2812,19 @@ ALTER TABLE `planes`
 -- AUTO_INCREMENT de la tabla `plan_clientes`
 --
 ALTER TABLE `plan_clientes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=792;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2082;
+
+--
+-- AUTO_INCREMENT de la tabla `tag`
+--
+ALTER TABLE `tag`
+  MODIFY `IdTag` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `test`
+--
+ALTER TABLE `test`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `tipificacion`
@@ -1245,10 +2833,69 @@ ALTER TABLE `tipificacion`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `transaccion`
+--
+ALTER TABLE `transaccion`
+  MODIFY `IdTransaccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `vehiculo`
+--
+ALTER TABLE `vehiculo`
+  MODIFY `IdVehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `barrera`
+--
+ALTER TABLE `barrera`
+  ADD CONSTRAINT `IdUsuario` FOREIGN KEY (`IdUsuario`) REFERENCES `usuarios` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `IdPersona` FOREIGN KEY (`IdPersona`) REFERENCES `persona` (`idPersona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `distrito`
+--
+ALTER TABLE `distrito`
+  ADD CONSTRAINT `IdBarrera` FOREIGN KEY (`IdBarrera`) REFERENCES `barrera` (`IdBarrera`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `equipos`
+--
+ALTER TABLE `equipos`
+  ADD CONSTRAINT `idbarrera2` FOREIGN KEY (`idbarrera_equipos`) REFERENCES `barrera` (`IdBarrera`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tag`
+--
+ALTER TABLE `tag`
+  ADD CONSTRAINT `IdCliente` FOREIGN KEY (`IdCliente`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `transaccion`
+--
+ALTER TABLE `transaccion`
+  ADD CONSTRAINT `IdTagt` FOREIGN KEY (`IdTag`) REFERENCES `tag` (`IdTag`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `vehiculo`
+--
+ALTER TABLE `vehiculo`
+  ADD CONSTRAINT `ID` FOREIGN KEY (`ID`) REFERENCES `planes` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `IdTag` FOREIGN KEY (`IdTag`) REFERENCES `tag` (`IdTag`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
