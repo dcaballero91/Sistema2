@@ -36,34 +36,26 @@ function Delete(){
 	echo "<img src='imagenes/warning.png'> Tabla <strong>Clientes</strong> ";
 	echo "</td>";
 	echo "<td>";
-	echo '<input name="permiso[]1" type="radio"  value="'.$_SESSION['USERCORE'].'|clientes">';
+	echo '<input name="permiso[]1" type="radio"  value="'.$_SESSION['USERCORE'].'|cliente">';
 	echo "</td>";
 	echo "</tr>";
 	
 	echo "<tr>";
 	echo "<td>";
-	echo "<img src='imagenes/warning.png'> Tabla <strong>Log_Llamadas</strong> ";
+	echo "<img src='imagenes/warning.png'> Tabla <strong>tags</strong> ";
 	echo "</td>";
 	echo "<td>";
-	echo '<input name="permiso[]2" type="radio"  value="'.$_SESSION['USERCORE'].'|log_llamadas">';
-	echo "</td>";
-	echo "</tr>";
-	
-	echo "<tr>";
-	echo "<td>";
-	echo "<img src='imagenes/warning.png'> Tabla <strong>Plan_Clientes</strong> ";
-	echo "</td>";
-	echo "<td>";
-	echo '<input name="permiso[]3" type="radio"  value="'.$_SESSION['USERCORE'].'|plan_clientes">';
+	echo '<input name="permiso[]2" type="radio"  value="'.$_SESSION['USERCORE'].'|tag">';
 	echo "</td>";
 	echo "</tr>";
 	
+	
 	echo "<tr>";
 	echo "<td>";
-	echo "<img src='imagenes/warning.png'> Tabla <strong>Tipificacion</strong> ";
+	echo "<img src='imagenes/warning.png'> Tabla <strong>Persona</strong> ";
 	echo "</td>";
 	echo "<td>";
-	echo '<input name="permiso[]4" type="radio"  value="'.$_SESSION['USERCORE'].'|tipificacion">';
+	echo '<input name="permiso[]4" type="radio"  value="'.$_SESSION['USERCORE'].'|persona">';
 	echo "</td>";
 	echo "</tr>";
 	

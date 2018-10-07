@@ -30,7 +30,7 @@ function ValidarRequeridos(){
 
 </script>
 <?php
-		include('DibujaVentana2.php');
+		include('DibujaVentana.php');
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');

@@ -3,7 +3,7 @@
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
-	$estatus = PermisosUsuario($_SESSION['USERCORE'],22,$conexion);
+	$estatus = PermisosUsuario($_SESSION['USERCORE'],23,$conexion);
 	if($estatus==0){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;
@@ -34,7 +34,7 @@ function Permisos(id){
 	th {padding:5px;background:#555;color:#fff}
 	td {padding:5px;border:solid #ddd;border-width:0 0 1px;}
 		.editable span{display:block;}
-		.editable span:hover {background:url(edit.png) 90% 50% no-repeat;cursor:pointer}
+		.editable span:hover {background:url(imagenes/edit.png) 90% 50% no-repeat;cursor:pointer}
 		
 		td input{height:24px;width:200px;border:1px solid #ddd;padding:0 5px;margin:0;border-radius:6px;vertical-align:middle}
 		a.enlace{display:inline-block;width:24px;height:24px;margin:0 0 0 5px;overflow:hidden;text-indent:-999em;vertical-align:middle}
@@ -85,7 +85,7 @@ Cargando la Página...<br/><br/>
 			for(var i=0;i<json.length;i++)
 			{
 				$('.editinplace').append(
-					"<tr><td class='id'>"+json[i].id+"</td><td class='Nombre'><span>"+json[i].nombre+"</span></td><td class='Apellido'><span>"+json[i].apellido+"</span></td><td class='editable' data-campo='ci'><span>"+json[i].ci+"</span></td><td class='editable' data-campo='Direccion'><span>"+json[i].direccion+"</span></td><td class='Telefono'><span>"+json[i].telefono+"</span></td></tr>");
+					"<tr><td class='id'>"+json[i].id+"</td><td class='Nombre'>"+json[i].nombre+"</td><td class='Apellido'>"+json[i].apellido+"</td><td class='editable' data-campo='ci'><span>"+json[i].ci+"</span></td><td class='editable' data-campo='Direccion'><span>"+json[i].direccion+"</span></td><td class='Telefono'>"+json[i].telefono+"</td></tr>");
 			}
 		});
 		

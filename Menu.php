@@ -29,7 +29,7 @@ select
 		$.MetroMenu( 
 			{
 				backicon: "imagenes/back.png",
-				animation: "fadeInDown",
+				animation: "fadeInLeft",
 				position: "top",
 				withtooltip: false,
 				closeonclick: false,
@@ -135,6 +135,12 @@ select
 										items:[
 																				]
 										}
+										,{	
+										name: "Listar Vehiculo",
+										icon: "imagenes/listar.png",
+										items:[
+																				]
+										}
 										,				]
 										},
 										{	
@@ -158,13 +164,7 @@ select
 																				]
 										}		
 										
-										,										{	
-										name: "Login",
-										icon: "imagenes/login.png",
-										items:[
-																				]
-										}		
-										,										{	
+										,																				{	
 										name: "Logout",
 										icon: "imagenes/logout.png",
 										items:[
@@ -185,6 +185,11 @@ select
 									{
 									name: "Cobranza", 
 									icon: "imagenes/pago.png",
+									items:[
+																	]
+									},{
+									name: "Paso", 
+									icon: "imagenes/paso.png",
 									items:[
 																	]
 									},{
@@ -227,16 +232,37 @@ select
 																				]
 										}
 												
-									,									]
-									}
-									,	
-										{
-										name: "Login", 
-										icon: "imagenes/login.png",
+									,								
+
+																	{	
+										name: "Nuevo Equipo",
+										icon: "imagenes/pi.png",
 										items:[
-																		]
-										}		
-										,	
+																			{	
+										name: "Equipo",
+										icon: "imagenes/raspberry.png",
+										items:[
+																				]
+										}	
+										,						{	
+										name: "Listar Equipos",
+										icon: "imagenes/listar.png",
+										items:[
+																				]
+										}	
+										,						]
+										}	
+										,	]
+									}
+									,		
+									{
+									name: "liberar", 
+									icon: "imagenes/liberar.png",
+									items:[
+																	]
+									}							
+									,
+										
 										{
 										name: "Logout", 
 										icon: "imagenes/logout.png",

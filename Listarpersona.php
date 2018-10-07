@@ -34,7 +34,7 @@ function Permisos(id){
 	th {padding:5px;background:#555;color:#fff}
 	td {padding:5px;border:solid #ddd;border-width:0 0 1px;}
 		.editable span{display:block;}
-		.editable span:hover {background:url(edit.png) 90% 50% no-repeat;cursor:pointer}
+		.editable span:hover {background:url(imagenes/edit.png) 90% 50% no-repeat;cursor:pointer}
 		
 		td input{height:24px;width:200px;border:1px solid #ddd;padding:0 5px;margin:0;border-radius:6px;vertical-align:middle}
 		a.enlace{display:inline-block;width:24px;height:24px;margin:0 0 0 5px;overflow:hidden;text-indent:-999em;vertical-align:middle}

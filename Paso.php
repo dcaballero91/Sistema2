@@ -3,7 +3,7 @@
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
-	$estatus = PermisosUsuario($_SESSION['USERCORE'],3,$conexion);
+	$estatus = PermisosUsuario($_SESSION['USERCORE'],24,$conexion);
 	if($estatus==0){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;
@@ -55,20 +55,21 @@ Cargando la Página...<br/><br/>
 <br/>
 <br/>
 
-		<div style="OVERFLOW:auto;WIDTH:800px;HEIGHT:500px">
+		<div style="OVERFLOW:auto;WIDTH:900px;HEIGHT:500px">
 			<div class="mensaje"></div>
 <table id="table" border=0 cellpadding="0" cellspacing="0">
 		<thead>
 			
 			<tr><th>ID</th>
 				<th>CEDULA</th>
-			<th>CANTIDAD</th>
-			<th>COD. TAG</th>
-			<th>MARCA</th>
-			<th>MODELO</th>
-			<th>MATRICULA</th>
-			<th>COSTO UN.</th>
-			<th>TOTAL</th>
+				<th>CANTIDAD</th>
+				<th>COD. TAG</th>
+				<th>MARCA</th>
+				<th>MODELO</th>
+				<th>MATRICULA</th>
+				<th>COSTO UN.</th>
+				<th>TOTAL</th>
+				<th>PASOS EN GS.</th>
 					</tr>
 		</thead>
 		<tbody class="editinplace">
@@ -85,7 +86,7 @@ Cargando la Página...<br/><br/>
 		function obtener_datos(){
 			$.ajax({
 				type: "GET",
-				url: "editPago.php?tabla=1" 
+				url: "editPaso.php?tabla=1" 
 			})
 			.done(function(json) {
 				json = $.parseJSON(json)
@@ -93,7 +94,7 @@ Cargando la Página...<br/><br/>
 				for(var i=0;i<json.length;i++)
 				{
 					$('.editinplace').append(
-						"<tr><td class='id'>"+json[i].id+"</td><td class='Ci'>"+json[i].ci+"</td><td class='editable' data-campo='Cantidad'><span>"+json[i].cantidad+"</span></td><td class='Cod_Tag'>"+json[i].cod_tag+"</td><td class=Marca'>"+json[i].marca+"</td><td class='Modelo'>"+json[i].modelo+"</td><td class='Matricula'>"+json[i].matricula+"</td><td class='Costo'>"+json[i].costo+"</td>><td class='total'>"+json[i].total+"</td></tr>");
+						"<tr><td class='id'>"+json[i].id+"</td><td class='Ci'>"+json[i].ci+"</td><td class='editable' data-campo='Cantidad'><span>"+json[i].cantidad+"</span></td><td class='Cod_Tag'>"+json[i].cod_tag+"</td><td class=Marca'>"+json[i].marca+"</td><td class='Modelo'>"+json[i].modelo+"</td><td class='Matricula'>"+json[i].matricula+"</td><td class='Costo'>"+json[i].costo+"</td><td class='total'>"+json[i].total+"</td><td class='total'>"+json[i].total2+"</td></tr>");
 
 				
 				}
@@ -103,14 +104,14 @@ Cargando la Página...<br/><br/>
 		/* OBTENEMOS TABLA */
 		$.ajax({
 			type: "GET",
-			url: "editPago.php?tabla=1" 
+			url: "editPaso.php?tabla=1" 
 		})
 		.done(function(json) {
 			json = $.parseJSON(json)
 			for(var i=0;i<json.length;i++)
 			{
 				$('.editinplace').append(
-					"<tr><td class='id'>"+json[i].id+"</td><td class='Ci'><span>"+json[i].ci+"</span></td><td class='editable' data-campo='Cantidad'><span>"+json[i].cantidad+"</span></td><td class='Cod_Tag'><span>"+json[i].cod_tag+"</span></td><td class=Marca'><span>"+json[i].marca+"</span></td><td class='Modelo'><span>"+json[i].modelo+"</span></td><td class='Matricula'><span>"+json[i].matricula+"</span></td><td class='Costo'><span>"+json[i].costo+"</span></td>><td class='total'>"+json[i].total+"</td></tr>");
+					"<tr><td class='id'>"+json[i].id+"</td><td class='Ci'>"+json[i].ci+"</td><td class='editable' data-campo='Cantidad'><span>"+json[i].cantidad+"</span></td><td class='Cod_Tag'>"+json[i].cod_tag+"</td><td class=Marca'>"+json[i].marca+"</td><td class='Modelo'>"+json[i].modelo+"</td><td class='Matricula'>"+json[i].matricula+"</td><td class='Costo'>"+json[i].costo+"</td>><td class='total'>"+json[i].total+"</td><td class='total'>"+json[i].total2+"</td></tr>");
 
 			
 			}
@@ -144,7 +145,7 @@ Cargando la Página...<br/><br/>
 			{
 				$.ajax({
 					type: "POST",
-					url: "editPago.php",
+					url: "editPaso.php",
 					data: { campo: campo, valor: nuevovalor, id:id }
 				})
 				.done(function( msg ) {

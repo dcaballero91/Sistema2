@@ -44,7 +44,9 @@ where transaccion.idTag = tag.idTag and vehiculo.ID = planes.ID and tag.idClient
 							"modelo"=>$usuarios["Modelo"],
 							"matricula"=>$usuarios["Matricula"],
 							"costo"=>$usuarios["Costo"],
-							"total"=>$usuarios["total"]
+							"total"=>$usuarios["total"],
+							"total2"=>$usuarios["total"]
+
 							
 			);
 		}

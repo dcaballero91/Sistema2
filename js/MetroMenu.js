@@ -156,10 +156,10 @@ function CloseMetroMenu()
             var SubMenuOptionsNumber = 0;
             if(settings.items[i].items != undefined)
             {
-                if(settings.items[i].items.length ==1)
+                if(settings.items[i].items.length ==2)
                 {
-                    SubMenuOptions = "1 option";
-                    SubMenuOptionsNumber = 1;
+                    SubMenuOptions = "2 option";
+                    SubMenuOptionsNumber = 2;
                 }
                 else
                 {

@@ -8,11 +8,10 @@ function ValidarRequeridos(){
 	
 	divResultado 		= document.getElementById('resultado');
 	var txtId 		= document.clientes.txtId.value;
-	var txtCod_tag	= document.clientes.txtCod_tag.value;
-	var Estado 			= document.clientes.Estado.value;
-		ajax = newAjax();	
+	var txtequipo	= document.clientes.txtequipo.value;
+	ajax = newAjax();	
 	
-	ajax.open("POST", "Configuracion/GuardaTag.php",true);
+	ajax.open("POST", "Configuracion/GuardarEquipo.php",true);
 	ajax.onreadystatechange=function() {
 		if (ajax.readyState==3) {
 			//mostrar resultados en esta capa
@@ -21,7 +20,7 @@ function ValidarRequeridos(){
 	}
 	ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 	//enviando los valores
-	ajax.send(	"&txtId="+txtId+"&txtCod_tag="+txtCod_tag+"&Estado="+Estado);
+	ajax.send(	"&txtId="+txtId+"&txtequipo="+txtequipo);
 	
 }
 </script>
@@ -30,33 +29,28 @@ function ValidarRequeridos(){
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
-	$estatus = PermisosUsuario($_SESSION['USERCORE'],25,$conexion);
+	$estatus = PermisosUsuario($_SESSION['USERCORE'],29,$conexion);
 	if($estatus==0){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;
 	}
-	Cabecera("Cargar Tag");
+	Cabecera("Cargar Equipo");
 	$boton		= "Salvar";
 	$javascript = "";
-	
+
 	echo '<div id="resultado"></div>';
 	echo '<form name="clientes" id="clientes" method="post" action="" onsubmit="ValidarRequeridos(); return false">';
 	echo '<center>';
 	echo '<table>';
-	echo '	<td><strong>Id Cliente:</strong></td>';
+	echo '	<td><strong>Distrito:</strong></td>';
 	echo '	<td><input type="text" name="txtId" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 	echo '<tr>';
-	echo '	<td><strong>Codigo Tag:</strong></td>';
-	echo '	<td><input type="text" name="txtCod_tag" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
+	echo '	<td><strong>Nombre de equipo:</strong></td>';
+	echo '	<td><input type="text" name="txtequipo" class="CajaTexto" size="40" x-webkit-speech="true"/></td>';
 	echo '</tr>';
 
-	echo '	<td><strong>Estado:</strong></td>';	
-	echo '	<td>';
-	echo '<select name="Estado">';
-	echo '<option value="1">Activo</option>';
-	echo '<option value="2">Inactivo</option>';
-	echo '</select>';
+	
 	echo '</td>';
 
 

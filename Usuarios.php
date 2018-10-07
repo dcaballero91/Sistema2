@@ -25,7 +25,7 @@ function ValidarRequeridos(){
 }
 </script>
 <?php
-	include('DibujaVentana2.php');
+	include('DibujaVentana.php');
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
@@ -73,7 +73,7 @@ function ValidarRequeridos(){
 	echo '</tr>';
 	echo '</table>';
 	echo '</center>';
-	Pie($boton,$javascript,$boton2,$javascript2);
+	Pie($boton,$javascript);
 
 
 	echo '</form>';

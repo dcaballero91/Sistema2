@@ -7,7 +7,7 @@ LOGIN							|Login.php
 MI INFORMACION					|EdicionUsuario.php
 TIPIFICACION					|Tipificacion.php
 USUARIOS						|Usuarios.php
-LISTAR USUARIO               	|ListarUsuarios.php
+LISTAR USUARIO               	|Listadeusuario.php 
 LOGOUT							|Logout.php
 PLANES							|Planes.php
 REPORTES 						|ListarReportes.php
@@ -18,8 +18,12 @@ PERSONA							|Persona.php
 LISTAR PERSONA               	|Listarpersona.php
 CLIENTE							|Clientes.php
 LISTAR CLIENTE               	|Listarcliente.php
-EDITAR CLIENTE					|EdicionCliente.php
 TAG								|Tag.php
 LISTAR TAG               		|Listartag.php
+LISTAR VEHICULO              	|Listarvehiculo.php
 VEHICULO               			|Vehiculo.php
 COBRANZA 						|Cobranza.php
+PASO 							|Paso.php
+EQUIPO 							|Equipo.php
+LISTAR EQUIPOS					|ListarEquipos.php
+LIBERAR							|Liberar.php

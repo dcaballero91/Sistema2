@@ -3,7 +3,7 @@
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
-	$estatus = PermisosUsuario($_SESSION['USERCORE'],10,$conexion);
+	$estatus = PermisosUsuario($_SESSION['USERCORE'],27,$conexion);
 	$permiso = PermisosUsuario($_SESSION['USERCORE'],11,$conexion);
 	$password= PermisosUsuario($_SESSION['USERCORE'],12,$conexion);
 	if($estatus==0){
@@ -75,7 +75,29 @@ if(mysql_num_rows($rs)!=0){
 		echo '<td>'.$rows['NOMBRE'].' '.$rows['APELLIDOS'].'</td>';		
 		echo '<td>'.$rows['CI'].'</td>';
 		echo '<td>'.$rows['USUARIO'].'</td>';
-		echo '<td>'.$tipo.'</td>';
+		
+		echo '<td>';
+		$tipo=$rows['TIPO_USUARIO'];
+		
+		if($tipo==1){
+		
+			echo "Administrador";
+		}
+		elseif ($tipo==2) {
+			echo "Supervisor";
+			# code...
+
+		}elseif ($tipo==3) {
+			echo "Cajero";
+			# code...
+			
+		}elseif ($tipo==4) {
+			echo "Entidad";
+			# code...
+			
+		}elseif ($tipo==5) {
+			echo "Cliente";
+		}
 		echo '</tr>';
 		
 	}

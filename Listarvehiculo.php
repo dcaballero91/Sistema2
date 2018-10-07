@@ -3,7 +3,7 @@
 	include('ScreenCatalogo_Seguridad.php');
 	include('Conexion_Abrir.php');
 	include('DataExtra.php');
-	$estatus = PermisosUsuario($_SESSION['USERCORE'],3,$conexion);
+	$estatus = PermisosUsuario($_SESSION['USERCORE'],28,$conexion);
 	if($estatus==0){
 		echo '<br/><div class="error-box round">Error: No Tiene Permisos de Acceso. Contacte el Administrador</div>';
 		exit;
@@ -55,25 +55,25 @@ Cargando la Página...<br/><br/>
 <br/>
 <br/>
 
-		<div style="OVERFLOW:auto;WIDTH:800px;HEIGHT:500px">
+		<div style="OVERFLOW:auto;WIDTH:1080px;HEIGHT:500px">
 			<div class="mensaje"></div>
-<table id="table" border=0 cellpadding="0" cellspacing="0">
-		<thead>
-			
-			<tr><th>ID</th>
-				<th>CEDULA</th>
-			<th>CANTIDAD</th>
-			<th>COD. TAG</th>
-			<th>MARCA</th>
-			<th>MODELO</th>
-			<th>MATRICULA</th>
-			<th>COSTO UN.</th>
-			<th>TOTAL</th>
+<table id="table" border=0 cellpadding="0" cellspacing="0" class="editinplace">
+			<tr>
+				<th>ID VEHICULO</th>
+				<th>NOMBRE</th>
+				<th>APELLIDO</th>
+				<th>TELEFONO</th>
+				<th>CI</th>
+				<th>DIRECCION</th>
+				<th>ID TAG</th>
+				<th>TAG ESTADO</th>
+				<th>MARCA</th>
+				<th>MODELO</th>
+				<th>MATRICULA</th>
+				<th>CHASIS</th>
+				<th>COSTO</th>
+								
 					</tr>
-		</thead>
-		<tbody class="editinplace">
-			
-		</tbody>	
 		</table>
 
 	</div>
@@ -82,37 +82,17 @@ Cargando la Página...<br/><br/>
 	<script>
 	$(document).ready(function() 
 	{
-		function obtener_datos(){
-			$.ajax({
-				type: "GET",
-				url: "editPago.php?tabla=1" 
-			})
-			.done(function(json) {
-				json = $.parseJSON(json)
-					$('.editinplace').empty();
-				for(var i=0;i<json.length;i++)
-				{
-					$('.editinplace').append(
-						"<tr><td class='id'>"+json[i].id+"</td><td class='Ci'>"+json[i].ci+"</td><td class='editable' data-campo='Cantidad'><span>"+json[i].cantidad+"</span></td><td class='Cod_Tag'>"+json[i].cod_tag+"</td><td class=Marca'>"+json[i].marca+"</td><td class='Modelo'>"+json[i].modelo+"</td><td class='Matricula'>"+json[i].matricula+"</td><td class='Costo'>"+json[i].costo+"</td>><td class='total'>"+json[i].total+"</td></tr>");
-
-				
-				}
-			});
-		}
-
 		/* OBTENEMOS TABLA */
 		$.ajax({
 			type: "GET",
-			url: "editPago.php?tabla=1" 
+			url: "editVehiculo.php?tabla=1"
 		})
 		.done(function(json) {
 			json = $.parseJSON(json)
 			for(var i=0;i<json.length;i++)
 			{
 				$('.editinplace').append(
-					"<tr><td class='id'>"+json[i].id+"</td><td class='Ci'><span>"+json[i].ci+"</span></td><td class='editable' data-campo='Cantidad'><span>"+json[i].cantidad+"</span></td><td class='Cod_Tag'><span>"+json[i].cod_tag+"</span></td><td class=Marca'><span>"+json[i].marca+"</span></td><td class='Modelo'><span>"+json[i].modelo+"</span></td><td class='Matricula'><span>"+json[i].matricula+"</span></td><td class='Costo'><span>"+json[i].costo+"</span></td>><td class='total'>"+json[i].total+"</td></tr>");
-
-			
+					"<tr><td class='id'>"+json[i].id+"</td><td class='Nombre'>"+json[i].nombre+"</td><td class='Apellido'>"+json[i].apellido+"</td><td class='Telefono'>"+json[i].telefono+"</td><td class='ci'>"+json[i].ci+"</td><td class='direccion'>"+json[i].direccion+"</td><td class='idtag'>"+json[i].idtag+"</td><td class='tagestado'>"+json[i].tagestado+"</td><td class='editable' data-campo='Marca'><span>"+json[i].marca+"</span></td><td class='editable' data-campo='Modelo'><span>"+json[i].modelo+"</span></td><td class='editable' data-campo='Matricula'><span>"+json[i].matricula+"</span></td><td class='editable' data-campo='Chasis'><span>"+json[i].chasis+"</span></td><td class='COSTO'>"+json[i].costo+"</td></tr>");
 			}
 		});
 		
@@ -144,23 +124,19 @@ Cargando la Página...<br/><br/>
 			{
 				$.ajax({
 					type: "POST",
-					url: "editPago.php",
+					url: "editVehiculo.php",
 					data: { campo: campo, valor: nuevovalor, id:id }
 				})
 				.done(function( msg ) {
 					$(".mensaje").html(msg);
-					obtener_datos();
-					//td.html("<span>"+nuevovalor+"</span>");
+					td.html("<span>"+nuevovalor+"</span>");
 					$("td:not(.id)").addClass("editable");
-					//setTimeout(function() {$('.ok,.ko').fadeOut('fast');}, 3000);
-
+					setTimeout(function() {$('.ok,.ko').fadeOut('fast');}, 3000);
 				});
-			
 			}
 			else $(".mensaje").html("<p class='error-box round'>Debes ingresar un valor</p>");
 		});
 	});
-
 	
 	</script>
 </center>

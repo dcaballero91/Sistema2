@@ -13,17 +13,17 @@
 	}elseif($txtApellidos==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Apellidos</div>";
 	}elseif($txtRut==""){
-		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Rut</div>";
+		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Ci</div>";
 	}elseif($txtDireccion==""){
 		$mensaje = '<br/><div class="error-box round">'."Campo Obligatorio: Direccion</div>";
 	}else{
 		
-		$sqlx = "SELECT ID FROM usuarios WHERE RUT='".$txtRut."'";
+		$sqlx = "SELECT ID FROM usuarios WHERE CI='".$txtRut."'";
 		$rsx  = mysql_query($sqlx,$conexion);
 		if(mysql_num_rows($rsx)!=0){
-			$mensaje = '<br/><div class="error-box round">'."Error: Rut En uso</div>";
+			$mensaje = '<br/><div class="error-box round">'."Error: Ci En uso</div>";
 		}else{
-			$sql = "INSERT INTO usuarios(NOMBRE,APELLIDOS,RUT,DIRECCION,USUARIO,PASSWORD,TIPO_USUARIO) VALUES ('".$txtNombre."','".$txtApellidos."','".$txtRut."',";
+			$sql = "INSERT INTO usuarios(NOMBRE,APELLIDOS,CI,DIRECCION,USUARIO,PASSWORD,TIPO_USUARIO) VALUES ('".$txtNombre."','".$txtApellidos."','".$txtRut."',";
 			$sql = $sql."'".$txtDireccion."','".$txtRut."','".$txtRut."','".$TipoUsuario."')";
 			mysql_query($sql,$conexion);
 			$mensaje = '<br/><div class="information-box round">'."Registros Guardados Correctamente</div>";

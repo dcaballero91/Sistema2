@@ -38,7 +38,7 @@ Cargando la Página...<br/><br/>
 <tr>
 <th>Ejecutivo</th>
 <th>Cliente</th>
-<th>Rut</th>
+<th>CI</th>
 <th>Movil</th>
 <th>Plan</th>
 <th>Tipificacion</th>
