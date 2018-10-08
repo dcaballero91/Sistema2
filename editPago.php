@@ -2,7 +2,7 @@
 $dbhost="localhost";
 $dbname="callcenter";
 $dbuser="root";
-$dbpass="";
+$dbpass="pedro";
 $db = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
 
 if (isset($_POST) && count($_POST)>0)
