@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $sql = "SELECT transaccion.IdTransaccion, transaccion.Cantidad, tag.Cod_Tag, transaccion.Cantidad * planes.Costo AS total
  FROM transaccion INNER JOIN tag INNER JOIN vehiculo inner join planes inner join Cliente
 where transaccion.idTag = tag.idTag and vehiculo.ID = planes.ID and tag.idCliente = Cliente.idCliente and  Cod_Tag= '$code'";
-echo $conexion;
+//echo $conexion;
 $rs       = mysql_query($sql);
 
         while($rows = mysql_fetch_assoc($rs)){
