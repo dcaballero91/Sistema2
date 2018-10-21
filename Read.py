@@ -24,6 +24,11 @@
 import RPi.GPIO as GPIO
 import MFRC522
 import signal
+from array import array
+import requests
+import socket
+from subprocess import call
+import time 
 
 continue_reading = True
 
@@ -61,8 +66,14 @@ while continue_reading:
     if status == MIFAREReader.MI_OK:
 
         # Print UID
-        print "Card read UID: %s,%s,%s,%s" % (uid[0], uid[1], uid[2], uid[3])
-    
+        #print "Card read UID: %s,%s,%s,%s" % (uid[0], uid[1], uid[2], uid[3])
+        card = (uid[0],uid[1],uid[2],uid[3])
+        uid0= uid[0]
+        uid1= uid[1]
+        uid2= uid[2]
+        uid3= uid[3]
+        card2=str(uid0)+str(uid1)+str(uid2)+str(uid3) 
+        print (card2)  
         # This is the default key for authentication
         key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
         
@@ -76,6 +87,21 @@ while continue_reading:
         if status == MIFAREReader.MI_OK:
             MIFAREReader.MFRC522_Read(8)
             MIFAREReader.MFRC522_StopCrypto1()
+            est = (socket.gethostname())
+	    payload = {'name': est, 'code': card2}	
+	    r = requests.post("http://192.168.0.13/Sistema/rfid.php", data=payload)
+	    code = (r.text)
+            print payload
+            print code
+	    if ("1" in code):
+            	call(["python","/home/pi/Documents/Adafruit_Python_CharLCD/abrir_puerta.py"])
+        	time.sleep(5)
+        	call(["python","/home/pi/Documents/servo/servo.py"])
+                call(["python","/home/pi/Documents/Adafruit_Python_CharLCD/welcome.py"]) 
+	    else:
+        	call(["python","/home/pi/Documents/Adafruit_Python_CharLCD/pasar_caja.py"])
+                call(["python","/home/pi/Documents/Adafruit_Python_CharLCD/welcome.py"]) 
+
         else:
             print "Authentication error"
 
